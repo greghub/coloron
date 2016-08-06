@@ -99,9 +99,9 @@
                 top: 50%;
                 width: 1px;
                 height: 1px;
-                background-color: rgba(255, 227, 69, 0.91);
+                background-color: rgba(255, 227, 69, 1);
                 border-radius: 50%;
-                box-shadow: 0 0 32px 32px rgba(255, 227, 69, 0.91), 
+                box-shadow: 0 0 32px 32px rgba(255, 227, 69, 1), 
                             0 0 150px 150px rgba(103, 244, 210, 0.4);
             }
             .small-noise {
@@ -160,7 +160,7 @@
                     $('body').prepend('<div class="small-noise"></div>');
                     var noise = $('body .small-noise').first();
                     noise.css({left: left, top: top, height: size, width: size});
-                    if(i%2==0) noise.addClass('yellow');
+                    //if(i%2==0) noise.addClass('yellow');
                 }
             }
 
