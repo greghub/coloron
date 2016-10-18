@@ -1,0 +1,67 @@
+@mixin bubble_shape ($width: 4px) {
+    border-radius: 50%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.12);
+    border-width: $width;
+}
+
+@mixin bubble ($size, $top, $left) {
+    height: $size;
+    width: $size;
+    top: $top;
+    left: $left;
+}
+
+@mixin bubble_hollow ($size, $top, $left) {
+    @include bubble ($size, $top, $left);
+    background-color: transparent;
+    border-style: solid;
+}
+
+@mixin triangle ($height, $width, $top, $left) {
+    border-left: ($height/2) solid transparent;
+    border-right: ($height/2) solid transparent;
+    border-bottom: $width solid rgba(0, 0, 0, 0.12);
+    background-color: transparent;
+    left: $left;
+    top: $top;
+}
+
+@mixin triangle_hollow ($height, $width, $top, $left) {
+    @include triangle( $height, $width, $top, $left );
+    &:after {    
+        content: " ";
+        display: block;
+        position: absolute;
+        border-left: ($height/4-1) solid transparent;
+        border-right: ($height/4-1) solid transparent;
+        border-bottom: ($height/2-3) solid transparent;
+        top: 6px;
+        left: -($width/4);
+
+        .red & {
+            border-bottom-color: #FF4571;
+        }
+        .yellow & {
+            border-bottom-color: #FFD145;
+        }
+        .purple & {
+            border-bottom-color: #8260F6;
+        }
+    }
+}
+
+@mixin block ($height, $width, $top, $left) {
+    height: $height;
+    width: $width;
+    top: $top;
+    left: $left;
+}
+
+@mixin block_hollow ($height, $width, $top, $left) {
+    @include block ($height, $width, $top, $left);
+    background-color: transparent;
+    border-style: solid;
+    box-sizing: border-box;
+}

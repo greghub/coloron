@@ -1,0 +1,170 @@
+.bubble {
+    @include bubble_shape;
+}
+.bubble-1 {
+    @include bubble(15px, 21px, 59px);
+}
+.bubble-2 {
+    @include bubble(27px, 36px, 16px);
+}
+.bubble-3 {
+    @include bubble(21px, 63px, 49px);
+}
+.bubble-4 {
+    @include bubble(15px, 98px, 37px);
+}
+.bubble-5 {
+    @include bubble_hollow(5px, 116px, 20px);
+}
+.bubble-6 {
+    @include bubble(6px, 128px, 63px);
+}
+.bubble-7 {
+    @include bubble(27px, 150px, 52px);
+}
+.bubble-8 {
+    @include bubble(19px, 154px, 18px);
+}
+.bubble-9 {
+    @include bubble(10px, 189px, 13px);
+}
+.bubble-10 {
+    @include bubble_hollow(5px, 199px, 52px);
+}
+.bubble-11 {
+    @include bubble(21px, 220px, 29px);
+}
+.bubble-12 {
+    @include bubble(21px, 263px, 48px);
+}
+.bubble-13 {
+    @include bubble_hollow(5px, 275px, 16px);
+}
+.bubble-14 {
+    @include bubble(15px, 296px, 34px);
+}
+.triangle {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+.triangle-1 {
+    @include bubble_shape;
+    @include bubble(10px, 22px, 55px);
+}
+.triangle-2 {
+    @include triangle_hollow(16px, 14px, 27px, 15px);
+}
+.triangle-3 {
+    @include triangle_hollow(24px, 19px, 60px, 43px);
+}
+.triangle-4 {
+    @include bubble_shape(3px);
+    @include bubble_hollow(8px, 61px, 17px);
+}
+.triangle-5 {
+    @include triangle(10px, 8px, 101px, 25px);
+    transform: rotate(180deg);
+}
+
+.triangle-6 {
+    @include triangle(8px, 6px, 103px, 60px);
+    transform: rotate(-90deg);
+}
+
+.triangle-7 {
+    @include triangle(25px, 19px, 126px, 17px);
+    transform: rotate(180deg);
+}
+
+.triangle-8 {
+    @include triangle(21px, 16px, 149px, 50px);
+}
+
+.triangle-9 {
+    @include triangle(11px, 8px, 177px, 21px);
+}
+
+.triangle-10 {
+    @include bubble_shape;
+    @include bubble(10px, 177px, 60px);
+}
+
+.triangle-11 {
+    @include triangle(18px, 13px, 213px, 33px);
+    transform: rotate(180deg);
+}
+
+.triangle-12 {
+    @include bubble_shape(2px);
+    @include bubble_hollow(10px, 233px, 65px);
+}
+
+.triangle-13 {
+    @include bubble_shape;
+    @include bubble(10px, 250px, 22px);
+}
+
+.triangle-14 {
+    @include triangle_hollow(16px, 14px, 270px, 45px);
+    transform: rotate(180deg);
+}
+
+.block {
+    border-radius: 7px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.12);
+    border-width: 3px;
+}
+
+.block-1 {
+    @include block_hollow(16px, 31px, 16px, 30px);
+}
+.block-2 {
+    @include block(14px, 42px, 50px, 15px);
+}
+.block-3 {
+    @include block(18px, 9px, 73px, 64px);
+}
+.block-4 {
+    @include block(9px, 14px, 84px, 26px);
+}
+.block-5 {
+    @include bubble_shape;
+    @include bubble(15px, 109px, 45px);
+}
+.block-6 {
+    @include block(9px, 27px, 135px, 19px);
+}
+.block-7 {
+    @include bubble_shape;
+    @include bubble_hollow(7px, 144px, 60px);
+}
+.block-8 {
+    @include block(27px, 14px, 164px, 24px);
+}
+.block-9 {
+    @include bubble_shape;
+    @include bubble(8px, 188px, 64px);
+}
+.block-10 {
+    @include block_hollow(12px, 22px, 219px, 11px);
+}
+.block-11 {
+    @include bubble_shape;
+    @include bubble(22px, 226px, 50px);
+}
+.block-12 {
+    @include block(18px, 9px, 248px, 26px);
+}
+.block-13 {
+    @include bubble_shape;
+    @include bubble(8px, 278px, 50px);
+}
+.block-14 {
+    @include block_hollow(12px, 22px, 297px, 18px);
+}
+.block-15 {
+    @include block(9px, 27px, 307px, 48px);
+}

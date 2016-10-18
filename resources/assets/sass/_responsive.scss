@@ -1,0 +1,71 @@
+@media screen and (max-width: 640px) {
+    .glow {    
+        width: 240px;
+        height: 240px;
+        left: -90px;
+        top: -90px;
+    }
+    .sun {
+        box-shadow: 0 0 20px 20px rgba(255, 227, 69, 1), 
+                    0 0 150px 150px rgba(103, 244, 210, 0.4);
+    }
+    .small-glow {
+        transform: scale(0.5);
+    }
+    .waves div {
+        background-size: auto 100%
+    }
+    .wave1, .wave2, .wave3, .wave4 {
+        height: 80px;
+    }
+    .top_wave {
+        height: 20px;
+    }
+    .wave1 {
+        bottom: -20px;
+    }
+    .wave2 {
+        bottom: 10px;
+    }
+    .wave3 {
+        bottom: 40px;
+    }
+    .wave4 {
+        bottom: 60px;
+    }
+    .mount1 {
+        background-size: auto 80%;
+        height: 80px;
+        bottom: 120px;
+    }
+    .mount2 {
+        background-size: auto 80%;
+        height: 120px;
+        bottom: 130px;
+    }
+    .clouds {
+        top: 25px;
+        height: 60px;
+        background-size: auto 100%;
+    }
+}
+@media screen and (max-width: 320px) {
+    .rotate {
+        position: fixed;
+        z-index: 99999;
+        background-color: #28DAD4;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        color: #fff;
+    }
+    .rotate:before {
+        display: block;
+        content: " ";
+        height: 40%;
+    }
+}
