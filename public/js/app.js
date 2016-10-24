@@ -8,27 +8,20 @@ var Game = function () {
     function Game() {
         _classCallCheck(this, Game);
 
-        this.speed = 50;
+        this.score = 0;
         this.screen = $(window).width(); // screen width
         this.steps = Math.floor(this.screen / 180); // how many steps (stick width + margin) it takes from one end to another
         this.timeline = new TimelineMax({ smoothChildTiming: true });
-        this.time = 2 - this.speed / 100;
-        //this.time = 0.5;
+        this.time = 1.5;
         this.colors = ["#FF4571", "#FFD145", "#8260F6"];
         this.colorsRGBA = ["rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)"];
         this.color = this.colors[0];
         this.prevColor = null;
-        this.prevEffect = null;
 
         $('#sticks').width((this.steps + 3) * 180);
     }
 
     _createClass(Game, [{
-        key: "getTime",
-        value: function getTime() {
-            return 2 - this.speed / 100;
-        }
-    }, {
         key: "generateSticks",
         value: function generateSticks() {
             for (var i = 0; i <= this.steps; i++) {
@@ -39,8 +32,15 @@ var Game = function () {
         key: "generateBall",
         value: function generateBall() {
             this.balltween = new TimelineMax({ repeat: -1, paused: 1 });
-            $('.scene .ball-holder').append('<div class="ball" id="ball"></div>');
+            $('.scene .ball-holder').append('<div class="ball red" id="ball"></div>');
             this.bounce();
+        }
+    }, {
+        key: "generateTweet",
+        value: function generateTweet() {
+            var top = $(window).height() / 2 - 150;
+            var left = $(window).width() / 2 - 300;
+            window.open("https://twitter.com/intent/tweet?url=http://codepen.io/greghvns/&amp;text=I scored " + this.score + " points on Coloron! Can you beat my score? @friends_names&amp;via=greghvns&amp;hashtags=coloron", "TweetWindow", "width=600px,height=300px,top=" + top + ",left=" + left);
         }
     }, {
         key: "intro",
@@ -62,16 +62,34 @@ var Game = function () {
                 } });
         }
     }, {
+        key: "showResult",
+        value: function showResult() {
+            var score = this.score;
+            $('.stop-game').css('display', 'flex');
+            $('.stop-game .final-score').text(score + '!');
+            $('.stop-game .result').text(this.showGrade(score));
+
+            var resultTimeline = new TimelineMax();
+            resultTimeline.fromTo('.stop-game .score-container', 0.7, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, ease: Elastic.easeOut.config(1.25, 0.5) }).fromTo('.stop-game .final-score', 2, { scale: 0.5 }, { scale: 1, ease: Elastic.easeOut.config(2, 0.5) }, 0).fromTo('.stop-game .result', 1, { scale: 0.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) }, 0.3);
+        }
+    }, {
+        key: "showGrade",
+        value: function showGrade(score) {
+            if (score > 30) return "Chuck Norris?";else if (score > 25) return "You're da man";else if (score > 20) return "Awesome";else if (score > 15) return "Great!";else if (score > 13) return "Nice!";else if (score > 10) return "Good Job!";else if (score > 5) return "Really?";else return "Poor...";
+        }
+    }, {
         key: "start",
         value: function start() {
 
             this.stop();
 
-            $('.start-game').css('display', 'none');
+            $('.start-game, .stop-game').css('display', 'none');
 
             new Game();
 
+            this.score = 0;
             $('#sticks, .scene .ball-holder').html('');
+            $('#score').text(this.score);
             this.generateSticks();
             this.generateBall();
 
@@ -86,8 +104,11 @@ var Game = function () {
     }, {
         key: "stop",
         value: function stop() {
-            $('#sticks, .scene .ball-holder').html('');
+
+            $('#sticks, .scene .ball-holder, #score').html('');
             TweenMax.killAll();
+
+            this.showResult();
         }
     }, {
         key: "moveToStart",
@@ -125,25 +146,80 @@ var Game = function () {
         key: "rearrange",
         value: function rearrange() {
 
-            this.timeline.timeScale(2);
-            this.balltween.timeScale(2);
+            var scale = this.speedUp();
+
+            this.timeline.timeScale(scale);
+            this.balltween.timeScale(scale);
+
             $('#sticks .stick').first().remove();
             new Stick();
+        }
+    }, {
+        key: "speedUp",
+        value: function speedUp() {
+            if (this.score > 30) {
+                return 1.8;
+            }
+            if (this.score > 20) {
+                return 1.7;
+            }
+            if (this.score > 15) {
+                return 1.5;
+            } else if (this.score > 12) {
+                return 1.4;
+            } else if (this.score > 10) {
+                return 1.3;
+            } else if (this.score > 8) {
+                return 1.2;
+            } else if (this.score > 5) {
+                return 1.1;
+            }
+            return 1;
         }
     }, {
         key: "bounce",
         value: function bounce() {
             var _this4 = this;
 
-            this.balltween.to('#ball', this.time / 2, { y: '+=200px', scaleY: 0.7, transformOrigin: "bottom", ease: Power2.easeIn, onComplete: this.checkColor }).to('#ball', this.time / 2, { y: '-=200px', scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeOut,
+            this.balltween.to('#ball', this.time / 2, { y: '+=200px', scaleY: 0.7, transformOrigin: "bottom", ease: Power2.easeIn,
+                onComplete: function onComplete() {
+                    _this4.checkColor();
+                }
+            }).to('#ball', this.time / 2, { y: '-=200px', scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeOut,
                 onStart: function onStart() {
                     while (_this4.prevColor == _this4.color) {
                         _this4.color = new Color().getRandomColor();
                     }
                     _this4.prevColor = _this4.color;
                     TweenMax.to('#ball', 0.5, { backgroundColor: _this4.color });
+                    $('#ball').removeClass('red').removeClass('yellow').removeClass('purple').addClass(new Color().colorcodeToName(_this4.color));
                 }
             });
+        }
+    }, {
+        key: "checkColor",
+        value: function checkColor() {
+
+            var ballPos = $('#ball').offset().left + $('#ball').width() / 2;
+            var stickWidth = $('.stick').width();
+            var score = this.score;
+
+            $('#sticks .stick').each(function () {
+                if ($(this).offset().left < ballPos && $(this).offset().left > ballPos - stickWidth) {
+
+                    if (Color.getColorFromClass($(this)) == Color.getColorFromClass('#ball')) {
+                        score++;
+                        $('#score').text(score);
+                        TweenMax.fromTo('#score', 0.5, { scale: 1.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) });
+                    } else {
+
+                        // you loose
+                        game.stop();
+                    }
+                }
+            });
+
+            this.score = score;
         }
     }]);
 
@@ -179,6 +255,7 @@ var Color = function () {
 
         this.colors = ["#FF4571", "#FFD145", "#8260F6"];
         this.effects = ["bubble", "triangle", "block"];
+        this.prevEffect = null;
     }
 
     _createClass(Color, [{
@@ -219,24 +296,13 @@ var Color = function () {
             el.removeClass('inactive');
         }
     }, {
-        key: "checkColor",
-        value: function checkColor() {
-
-            var ballPos = $('#ball').offset().left + $('#ball').width() / 2;
-            var stickWidth = $('.stick').width();
-
-            $('#sticks .stick').each(function () {
-                if ($(this).offset().left < ballPos && $(this).offset().left > ballPos - stickWidth) {
-
-                    //
-
-                }
-            });
-        }
-    }, {
         key: "getRandomEffect",
         value: function getRandomEffect() {
-            var effectIndex = Math.random() * 2;
+            var effectIndex = null;
+            while (effectIndex == this.prevEffect) {
+                effectIndex = Math.random() * 2;
+            }
+            this.prevEffect = effectIndex;
             return this.effects[Math.round(effectIndex)];
         }
     }, {
@@ -249,6 +315,19 @@ var Color = function () {
                     el.append("<div class=\"" + effect + " " + effect + "-" + i + "\"><div class=\"inner\"></div><div class=\"inner inner-2\"></div></div>");
                 } else {
                     el.append("<div class=\"" + effect + " " + effect + "-" + i + "\"></div>");
+                }
+            }
+        }
+    }], [{
+        key: "addColorClass",
+        value: function addColorClass(el) {}
+    }, {
+        key: "getColorFromClass",
+        value: function getColorFromClass(el) {
+            var classes = $(el).attr('class').split(/\s+/);
+            for (var i = 0, len = classes.length; i < len; i++) {
+                if (classes[i] == 'red' || classes[i] == 'yellow' || classes[i] == 'purple') {
+                    return classes[i];
                 }
             }
         }
