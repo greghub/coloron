@@ -3,12 +3,81 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Coloron</title>
+        <title>Coloron: if you score 99 - you're a nerd</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">  
         <link rel="stylesheet" type="text/css" href="public/css/app.css">  
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
+
+        <div class="start-game game-full-flex" id="start-game">
+            
+            <div class="start-game-top"></div>    
+
+            <div class="logo-holder">
+                <p class="logo">
+                    <span>C</span>
+                    <span>o</span>
+                    <span>l</span>
+                    <span>o</span>
+                    <span>r</span>
+                    <span>o</span>
+                    <span>n</span>
+                </p>
+                <a class="play-button" href="#" onclick="game.start()">Play</a>
+                <h4 class="hint">hint: <span>red</span> color always comes first</h4>
+            </div>
+
+            <div class="how-to-play">
+                <div class="section-1">
+                    <h4>Bouncing ball<br>changes color</h4>
+                    <div class="content">
+                        <div class="ball-demo" id="ball-demo"></div>
+                    </div>
+                </div>
+                <div class="section-2">
+                    <h4>Tap on the bar to switch the colors<br>(Red, Yellow, Purple)</h4>
+                    <div class="content">
+                        <div class="bar bar-1" data-index="0"></div>
+                        <div class="bar bar-2"></div>
+                        <div class="bar bar-3"></div>
+                    </div>
+                </div>
+                <div class="section-3">
+                    <h4>Always match the<br>ball and bar colors</h4>
+                    <div class="content">
+                        <div class="ball-demo" id="ball-demo"></div>
+                        <div class="bar bar-1"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="stop-game game-full-flex">
+
+            <div class="score-container">
+
+                <h1>Coloron</h1>
+
+                <div class="final-score"></div>
+                <div class="result"></div>
+
+                <h4>Tweet to challenge friends</h4>
+
+                <p>
+                    <a class="tweet" href="#" onclick="game.generateTweet()">
+                        <i class="fa fa-twitter" aria-hidden="true"></i> Tweet
+                    </a>
+                </p>
+
+                <a class="play-again" href="#" onclick="game.start()">Play Again</a>
+
+            </div>
+
+        </div>
 
         <div class="rotate">Please rotate your device</div>
 
@@ -31,11 +100,10 @@
 
         <div class="clouds"></div>
 
-        <div class="ball" id="ball"></div>
-
-        <div class="sticks" id="sticks">
-
-
+        <div class="scene">
+            <div class="score" id="score"></div>
+            <div class="ball-holder"></div>
+            <div class="sticks" id="sticks"></div>
         </div>
 
         <div class="noise"></div>
@@ -43,92 +111,38 @@
         <script src="public/js/jquery-3.1.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="assets/js/jquery-3.1.0.min.js"><\/script>')</script>
         <script src="public/js/TweenMax.min.js"></script>
-        <script>
-
-            function smallGlows(number) {
-                var h = $(window).height();
-                var w = $(window).width();
-
-                for(var i = 0; i < number; i++) {
-                    var left = Math.round(Math.random()*w);
-                    var top = Math.round(Math.random()*(h/2));
-                    var size = Math.round(Math.random()*8) + 4;
-                    $('.small-glows').prepend('<div class="small-glow"></div>');
-                    var noise = $('.small-glows .small-glow').first();
-                    noise.css({left: left, top: top, height: size, width: size});
-                    //if(i%2==0) noise.addClass('yellow');
-                }
-            }
-
-            $(document).ready(function(){
-
-                smallGlows(20);
-
-                speed = 15;
-
-                /*
-                var bubble = new TimelineMax({paused: false});
-                bubble.staggerFromTo('.bubble', 0.3, {scale: 0.1}, {scale: 1, onComplete: bubble}, 0.03)
-                bubble.staggerTo('.bubble', 0.5, {y: '-=60px', yoyo: true, repeat: -1}, 0.03);
-                */
-
-                animate(speed);
-            });
-
-            function playBubble(el) {
-                var bubble = new TimelineMax({paused: false});
-                bubble.staggerFromTo(el.find('.bubble'), 0.3, {scale: 0.1}, {scale: 1, onComplete: bubble}, 0.03)
-                bubble.staggerTo(el.find('.bubble'), 0.5, {y: '-=60px', yoyo: true, repeat: -1}, 0.03);
-            }
-
-            function animate(speed) {
-
-                var noise = TweenMax.staggerTo('.small-noise', speed*0.1, {scale: 1.2, repeat: -1, yoyo: true}, speed*0.1);
-                $('.small-glow').each(function(){
-                    speedDelta = Math.round(Math.random()*8);
-                    radius = Math.round(Math.random()*20)+20;
-                    TweenMax.to($(this), speed+speedDelta, {rotation: 360, transformOrigin: "-"+radius+"px -"+radius+"px", repeat: -1, ease: Power0.easeNone});
-                })
-
-                var wavet = TweenMax.to('.top_wave', speed*1.7, {backgroundPositionX: '-=2305px', repeat: -1, ease: Power0.easeNone});
-                //var wavet = TweenMax.to('.top_wave', speed*0.7*0.2, {y: '+=10px', repeat: -1, yoyo: true, ease: Power0.easeNone});
-
-                var wave1 = TweenMax.to('.wave1', speed*1.9, {backgroundPositionX: '-=2305px', repeat: -1, ease: Power0.easeNone});
-                //var wave1 = TweenMax.to('.wave1', speed*0.9*0.2, {y: '-=10px', repeat: -1, yoyo: true, ease: Power0.easeNone});
-
-                var wave2 = TweenMax.to('.wave2', speed*2, {backgroundPositionX: '-=2305px', repeat: -1, ease: Power0.easeNone});
-                //var wave2 = TweenMax.to('.wave2', speed*0.2, {y: '-=10px', repeat: -1, yoyo: true, ease: Power0.easeNone});
-
-                var wave3 = TweenMax.to('.wave3', speed*2.2, {backgroundPositionX: '-=2305px', repeat: -1, ease: Power0.easeNone});
-                //var wave3 = TweenMax.to('.wave3', speed*0.2, {y: '-=10px', repeat: -1, yoyo: true, ease: Power0.easeNone});
-
-                var wave4 = TweenMax.to('.wave4', speed*2.4, {backgroundPositionX: '-=2305px', repeat: -1, ease: Power0.easeNone});
-                //var wave4 = TweenMax.to('.wave4', speed*1.4*0.2, {y: '-=10px', repeat: -1, yoyo: true, ease: Power0.easeNone})
-
-
-                var mount1 = TweenMax.to('.mount1', speed*8, {backgroundPositionX: '-=1760px', repeat: -1, ease: Power0.easeNone});
-                var mount2 = TweenMax.to('.mount2', speed*10, {backgroundPositionX: '-=1782px', repeat: -1, ease: Power0.easeNone});
-
-                var clouds = TweenMax.to('.clouds', speed*3, {backgroundPositionX: '-=1001px', repeat: -1, ease: Power0.easeNone});                
-            }    
-
-            function moveScene() {
-                TweenMax.to('#sticks', 1, { x: '-=50px', ease: Power0.easeNone, onComplete: moveScene});
-            }
-
-        </script>
-        <script src="public/js/app.js"></script>
-        <!--<script src="resources/assets/js/app.js"></script>-->
+        <!-- <script src="public/js/app.js"></script> -->
+        <script src="resources/assets/js/app.js"></script>
         <script>
             var game = new Game();
+            var animation = new Animation();
+            var color = new Color();
+
+            Animation.generateSmallGlows(20);
+
+            $(document).ready(function(){
+                game.intro();
+                //game.showResult();
+            })
 
             $(document).on('click', '.stick', function(){
-                game.changeColor($(this));
+                color.changeColor($(this));
                 if($(this).hasClass('no-effect')) {
-                    playBubble($(this));
+                    if($(this).hasClass('bubble-stick')) {
+                        animation.playBubble($(this));
+                    } else if($(this).hasClass('triangle-stick')) {
+                        animation.playTriangle($(this));
+                    } else if($(this).hasClass('block-stick')) {
+                        animation.playBlock($(this));
+                    }
                     $(this).removeClass('no-effect');
                 }
             });
+
+            $(document).on('click', '.section-2 .bar', function(){
+                color.changeColor($(this));
+            });
+
         </script>
 
     </body>

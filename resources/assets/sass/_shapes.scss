@@ -110,61 +110,86 @@
     transform: rotate(180deg);
 }
 
-.block {
-    border-radius: 7px;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.12);
-    border-color: rgba(0, 0, 0, 0.12);
-    border-width: 3px;
-}
-
-.block-1 {
-    @include block_hollow(16px, 31px, 16px, 30px);
-}
-.block-2 {
-    @include block(14px, 42px, 50px, 15px);
-}
-.block-3 {
-    @include block(18px, 9px, 73px, 64px);
-}
-.block-4 {
-    @include block(9px, 14px, 84px, 26px);
-}
-.block-5 {
-    @include bubble_shape;
-    @include bubble(15px, 109px, 45px);
-}
-.block-6 {
-    @include block(9px, 27px, 135px, 19px);
-}
-.block-7 {
-    @include bubble_shape;
-    @include bubble_hollow(7px, 144px, 60px);
-}
-.block-8 {
-    @include block(27px, 14px, 164px, 24px);
-}
-.block-9 {
-    @include bubble_shape;
-    @include bubble(8px, 188px, 64px);
-}
-.block-10 {
-    @include block_hollow(12px, 22px, 219px, 11px);
-}
-.block-11 {
-    @include bubble_shape;
-    @include bubble(22px, 226px, 50px);
-}
-.block-12 {
-    @include block(18px, 9px, 248px, 26px);
-}
-.block-13 {
-    @include bubble_shape;
-    @include bubble(8px, 278px, 50px);
-}
-.block-14 {
-    @include block_hollow(12px, 22px, 297px, 18px);
-}
-.block-15 {
-    @include block(9px, 27px, 307px, 48px);
+.stick {
+    .block {
+        position: absolute;
+        overflow: hidden;
+        z-index: 999;
+        border-radius: 7px;
+        .inner {
+            border-radius: 7px;
+            background-color: rgba(0, 0, 0, 0.12);
+            border-color: rgba(0, 0, 0, 0.12);
+            border-width: 3px;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+        &:nth-child(2n+1) .inner-2 {
+            left: -200%;
+        }
+        &:nth-child(2n+2) .inner-2 {
+            left: 200%;
+        }
+    }
+    .block-1 {
+        @include block_hollow(16px, 31px, 16px, 30px);
+    }
+    .block-2 {
+        @include block(14px, 42px, 50px, 15px);
+    }
+    .block-3 {
+        @include block(18px, 9px, 73px, 64px);
+    }
+    .block-4 {
+        @include block(9px, 14px, 84px, 26px);
+    }
+    .block-5 {
+        @include block(15px, 15px, 109px, 45px);
+        .inner { 
+            border-radius: 50%;
+        }
+    }
+    .block-6 {
+        @include block(9px, 27px, 135px, 19px);
+    }
+    .block-7 {
+        @include block(12px, 12px, 144px, 60px); 
+        .inner { 
+            border-radius: 50%;
+            border-style: solid;
+            box-sizing: border-box;
+            background-color: transparent;
+        }
+    }
+    .block-8 {
+        @include block(27px, 14px, 164px, 24px);
+    }
+    .block-9 {
+        @include block(8px, 8px, 188px, 64px);
+    }
+    .block-10 {
+        @include block_hollow(12px, 22px, 219px, 11px);
+    }
+    .block-11 {
+        @include block(22px, 22px, 226px, 50px);
+        .inner {
+            border-radius: 50%;
+        }
+    }
+    .block-12 {
+        @include block(18px, 9px, 248px, 26px);
+    }
+    .block-13 {
+        @include block(8px, 8px, 278px, 50px);
+        .inner {    
+            border-radius: 50%;
+        }
+    }
+    .block-14 {
+        @include block_hollow(12px, 22px, 297px, 18px);
+    }
+    .block-15 {
+        @include block(9px, 27px, 307px, 48px);
+    }
 }

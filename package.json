@@ -1,26 +1,26 @@
 {
-  "name": "coloron",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/greghub/coloron.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/greghub/coloron/issues"
-  },
-  "homepage": "https://github.com/greghub/coloron#readme",
-  "devDependencies": {
-    "babel-preset-es2015": "^6.16.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.3.2"
-  }
+    "name": "coloron",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/greghub/coloron.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/greghub/coloron/issues"
+    },
+    "homepage": "https://github.com/greghub/coloron#readme",
+    "devDependencies": {
+        "babel-preset-es2015": "^6.16.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-concat": "^2.6.0",
+        "gulp-sass": "^2.3.2"
+    }
 }

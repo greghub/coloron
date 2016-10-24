@@ -39,15 +39,16 @@
         border-bottom: ($height/2-3) solid transparent;
         top: 6px;
         left: -($width/4);
+        transition: border-bottom-color 0.4s ease;
 
         .red & {
-            border-bottom-color: #FF4571;
+            border-bottom-color: #fc5c82;
         }
         .yellow & {
-            border-bottom-color: #FFD145;
+            border-bottom-color: #fcd45c;
         }
         .purple & {
-            border-bottom-color: #8260F6;
+            border-bottom-color: #9174f5;
         }
     }
 }
@@ -61,7 +62,9 @@
 
 @mixin block_hollow ($height, $width, $top, $left) {
     @include block ($height, $width, $top, $left);
-    background-color: transparent;
-    border-style: solid;
-    box-sizing: border-box;
+    & .inner {
+        background-color: transparent !important;
+        border-style: solid;
+        box-sizing: border-box;
+    }
 }
