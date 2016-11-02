@@ -2,22 +2,27 @@ class Game {
 
     constructor() {
 
+
         this.score = 0;
+
+
         this.screen = $(window).width(); // screen width
-        this.steps = Math.floor(this.screen/180); // how many steps (stick width + margin) it takes from one end to another
+        this.screenHeight = $(window).height();
+        this.scale = this.screenHeight/800;
+        this.stickWidth = 180*this.scale;
+
+        this.steps = this.screen/this.stickWidth; // how many steps (stick width + margin) it takes from one end to another
         this.timeline = new TimelineMax({smoothChildTiming: true});
-        this.time = 1.5;
+        this.time = 1; // initial speed
         this.colors = ["#FF4571", "#FFD145", "#8260F6"];
         this.colorsRGBA = ["rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)"];
         this.color = this.colors[0];
         this.prevColor = null;
-
-        $('#sticks').width((this.steps+3) * 180);
-
     }
 
     generateSticks() {
-        for(let i = 0; i <= this.steps; i++)
+        let numberOfSticks = Math.ceil(this.steps);
+        for(let i = 0; i <= numberOfSticks; i++)
             new Stick();
     }
 
@@ -46,13 +51,14 @@ class Game {
 
         ball.to('.start-game .section-1 .ball-demo', 0.5, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn})
             .to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,  
-                onStart: () => {
-                    while(this.prevColor==this.color) {
-                        this.color = (new Color).getRandomColor();
-                    }
-                    this.prevColor = this.color;
-                    TweenMax.to('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
-                } });
+                    onStart: () => {
+                        while(this.prevColor==this.color) {
+                            this.color = (new Color).getRandomColor();
+                        }
+                        this.prevColor = this.color;
+                        TweenMax.to('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
+                    } 
+                });
     }
 
     showResult() {
@@ -95,9 +101,9 @@ class Game {
         this.generateSticks();
         this.generateBall();
 
-        Animation.sceneAnimation();
+        //Animation.sceneAnimation();
         this.moveToStart();
-        this.moveScene();
+        //this.moveScene();
 
         // reset timescale to normal as the game speeds up
         this.timeline.timeScale(1);
@@ -110,6 +116,31 @@ class Game {
         TweenMax.killAll();
         
         this.showResult();
+    }
+
+    resizeScreen() {
+        this.stop();
+        TweenMax.killAll(); // prevent multiple calls on resize
+        this.intro();
+    }
+
+    scaleScreen() {
+
+        let height = $(window).height();
+        let width = $(window).width();
+        //if(this.scale<0.7) this.scale = 0.7;
+
+        $('.container')
+                .css('transform', 'scale(' + this.scale + ')')
+                .css('height', height/this.scale)
+                .css('width', width/this.scale)
+                .css('transformOrigin', 'left top');
+
+
+
+        $('#sticks').width(this.screen/this.scale + 3 * this.stickWidth);
+
+        console.log(this.steps, $('#sticks').width(), this.screen);
     }
 
     moveToStart() {        
@@ -183,11 +214,11 @@ class Game {
     bounce() {
 
         this.balltween
-                .to('#ball', this.time/2, {y: '+=200px', scaleY: 0.7, transformOrigin: "bottom", ease: Power2.easeIn,
+                .to('#ball', this.time/2, {y: '+=250px', scaleY: 0.7, transformOrigin: "bottom", ease: Power2.easeIn,
                     onComplete: () => {
                         this.checkColor();
                     }
-                }).to('#ball', this.time/2, {y: '-=200px', scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeOut, 
+                }).to('#ball', this.time/2, {y: '-=250px', scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeOut, 
                     onStart: () => {
                         while(this.prevColor==this.color) {
                             this.color = (new Color).getRandomColor();
@@ -218,7 +249,7 @@ class Game {
                 } else {
 
                     // you loose
-                    game.stop();
+                    //game.stop();
 
                 }
 

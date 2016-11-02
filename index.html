@@ -5,114 +5,118 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Coloron: if you score 99 - you're a nerd</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
         <link rel="stylesheet" type="text/css" href="public/css/app.css">  
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
 
-        <div class="start-game game-full-flex" id="start-game">
-            
-            <div class="start-game-top"></div>    
+        <div class="container">
 
-            <div class="logo-holder">
-                <p class="logo">
-                    <span>C</span>
-                    <span>o</span>
-                    <span>l</span>
-                    <span>o</span>
-                    <span>r</span>
-                    <span>o</span>
-                    <span>n</span>
-                </p>
-                <a class="play-button" href="#" onclick="game.start()">Play</a>
-                <h4 class="hint">hint: <span>red</span> color always comes first</h4>
-            </div>
+            <div class="start-game game-full-flex" id="start-game">
+                
+                <div class="start-game-top"></div>    
 
-            <div class="how-to-play">
-                <div class="section-1">
-                    <h4>Bouncing ball<br>changes color</h4>
-                    <div class="content">
-                        <div class="ball-demo" id="ball-demo"></div>
+                <div class="logo-holder">
+                    <p class="logo">
+                        <span>C</span>
+                        <span>o</span>
+                        <span>l</span>
+                        <span>o</span>
+                        <span>r</span>
+                        <span>o</span>
+                        <span>n</span>
+                    </p>
+                    <a class="play-button" href="#" onclick="game.start()">Play</a>
+                    <h4 class="hint">hint: <span>red</span> color always comes first</h4>
+                </div>
+
+                <div class="how-to-play">
+                    <div class="section section-1">
+                        <h4>Bouncing ball<br>changes color</h4>
+                        <div class="content">
+                            <div class="ball-demo" id="ball-demo"></div>
+                        </div>
+                    </div>
+                    <div class="section section-2">
+                        <h4>Tap on the bar to switch the colors<br>(Red, Yellow, Purple)</h4>
+                        <div class="content">
+                            <div class="bar bar-1" data-index="0"></div>
+                            <div class="bar bar-2"></div>
+                            <div class="bar bar-3"></div>
+                        </div>
+                    </div>
+                    <div class="section section-3">
+                        <h4>Always match the<br>ball and bar colors</h4>
+                        <div class="content">
+                            <div class="ball-demo" id="ball-demo"></div>
+                            <div class="bar bar-1"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="section-2">
-                    <h4>Tap on the bar to switch the colors<br>(Red, Yellow, Purple)</h4>
-                    <div class="content">
-                        <div class="bar bar-1" data-index="0"></div>
-                        <div class="bar bar-2"></div>
-                        <div class="bar bar-3"></div>
-                    </div>
-                </div>
-                <div class="section-3">
-                    <h4>Always match the<br>ball and bar colors</h4>
-                    <div class="content">
-                        <div class="ball-demo" id="ball-demo"></div>
-                        <div class="bar bar-1"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="stop-game game-full-flex">
-
-            <div class="score-container">
-
-                <h1>Coloron</h1>
-
-                <div class="final-score"></div>
-                <div class="result"></div>
-
-                <h4>Tweet to challenge friends</h4>
-
-                <p>
-                    <a class="tweet" href="#" onclick="game.generateTweet()">
-                        <i class="fa fa-twitter" aria-hidden="true"></i> Tweet
-                    </a>
-                </p>
-
-                <a class="play-again" href="#" onclick="game.start()">Play Again</a>
 
             </div>
 
+            <div class="stop-game game-full-flex">
+
+                <div class="score-container">
+
+                    <h1>Coloron</h1>
+
+                    <div class="final-score"></div>
+                    <div class="result"></div>
+
+                    <h4>Tweet to challenge friends</h4>
+
+                    <p>
+                        <a class="tweet" href="#" onclick="game.generateTweet()">
+                            <i class="fa fa-twitter" aria-hidden="true"></i> Tweet
+                        </a>
+                    </p>
+
+                    <a class="play-again" href="#" onclick="game.start()">Play Again</a>
+
+                </div>
+
+            </div>
+
+            <div class="rotate">Please rotate your device</div>
+
+            <div class="small-glows"></div>
+
+            <div class="glow"><div class="sun"></div></div>
+
+            <div class="waves">
+                <div class="top_wave"></div>
+                <div class="wave1"></div>
+                <div class="wave2"></div>
+                <div class="wave3"></div>
+                <div class="wave4"></div>
+            </div>
+
+            <div class="mounts">
+                <div class="mount1"></div>
+                <div class="mount2"></div>
+            </div>
+
+            <div class="clouds"></div>
+
+            <div class="scene">
+                <div class="score" id="score"></div>
+                <div class="ball-holder"></div>
+                <div class="sticks" id="sticks"></div>
+            </div>
+
+            <div class="noise"></div>
+
         </div>
-
-        <div class="rotate">Please rotate your device</div>
-
-        <div class="small-glows"></div>
-
-        <div class="glow"><div class="sun"></div></div>
-
-        <div class="waves">
-            <div class="top_wave"></div>
-            <div class="wave1"></div>
-            <div class="wave2"></div>
-            <div class="wave3"></div>
-            <div class="wave4"></div>
-        </div>
-
-        <div class="mounts">
-            <div class="mount1"></div>
-            <div class="mount2"></div>
-        </div>
-
-        <div class="clouds"></div>
-
-        <div class="scene">
-            <div class="score" id="score"></div>
-            <div class="ball-holder"></div>
-            <div class="sticks" id="sticks"></div>
-        </div>
-
-        <div class="noise"></div>
 
         <script src="public/js/jquery-3.1.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="assets/js/jquery-3.1.0.min.js"><\/script>')</script>
         <script src="public/js/TweenMax.min.js"></script>
-        <script src="public/js/app.js"></script>
-        <!-- <script src="resources/assets/js/app.js"></script> -->
+        <!-- <script src="public/js/app.js"></script> -->
+        <script src="resources/assets/js/app.js"></script>
         <script>
             var game = new Game();
             var animation = new Animation();
@@ -123,6 +127,9 @@
             $(document).ready(function(){
                 game.intro();
                 //game.showResult();
+                game.scaleScreen();
+                //game.start();
+                //game.bounce();
             })
 
             $(document).on('click', '.stick', function(){
@@ -142,6 +149,12 @@
             $(document).on('click', '.section-2 .bar', function(){
                 color.changeColor($(this));
             });
+
+            $(window).resize(function(){
+                //game.resizeScreen();
+                game.scaleScreen();
+
+            })
 
         </script>
 

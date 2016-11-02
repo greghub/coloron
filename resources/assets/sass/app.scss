@@ -130,6 +130,10 @@ body {
     float: left;
     margin-right: 90px;
     transition: background-color 0.4s ease;
+    cursor: url(../svg/cursor.svg), pointer;
+    &:focus, &:active {
+        cursor: url(../svg/cursor-tap.svg), pointer;
+    }
 }
 .stick.red {
     background-color: #FF4571;
@@ -153,7 +157,7 @@ body {
     border-radius: 50%;
 }
 .ball {
-    margin-bottom: 200px;
+    margin-bottom: 250px;
 }
 .controls {
     z-index: 999999;
@@ -226,6 +230,12 @@ body {
         display: flex;
         justify-content: space-around;
         width: 100%;
+        .section-1, .section-3 {
+            flex: 1;
+            .content {
+                justify-content: center;
+            }
+        }
         h4 {
             color: #fff;
             font-weight: 400;
@@ -259,6 +269,9 @@ body {
         .section-2 {
             .bar {
                 cursor: url(../svg/cursor.svg), pointer;
+                &:focus, &:active {
+                    cursor: url(../svg/cursor-tap.svg), pointer;
+                }
             }
         }
         .section-3 {

@@ -596,7 +596,10 @@ body {
   overflow: hidden;
   float: left;
   margin-right: 90px;
-  transition: background-color 0.4s ease; }
+  transition: background-color 0.4s ease;
+  cursor: url(../svg/cursor.svg), pointer; }
+  .stick:focus, .stick:active {
+    cursor: url(../svg/cursor-tap.svg), pointer; }
 
 .stick.red {
   background-color: #FF4571; }
@@ -620,7 +623,7 @@ body {
   border-radius: 50%; }
 
 .ball {
-  margin-bottom: 200px; }
+  margin-bottom: 250px; }
 
 .controls {
   z-index: 999999;
@@ -686,6 +689,10 @@ body {
   display: flex;
   justify-content: space-around;
   width: 100%; }
+  .start-game .how-to-play .section-1, .start-game .how-to-play .section-3 {
+    flex: 1; }
+    .start-game .how-to-play .section-1 .content, .start-game .how-to-play .section-3 .content {
+      justify-content: center; }
   .start-game .how-to-play h4 {
     color: #fff;
     font-weight: 400;
@@ -712,6 +719,8 @@ body {
       background: #4C4660; }
   .start-game .how-to-play .section-2 .bar {
     cursor: url(../svg/cursor.svg), pointer; }
+    .start-game .how-to-play .section-2 .bar:focus, .start-game .how-to-play .section-2 .bar:active {
+      cursor: url(../svg/cursor-tap.svg), pointer; }
   .start-game .how-to-play .section-3 .ball-demo {
     background-color: #815FF8; }
   .start-game .how-to-play .section-3 .bar-1 {
