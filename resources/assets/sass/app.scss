@@ -12,6 +12,13 @@ body {
 .rotate {
     display: none;
 }
+.container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
 .waves, .mounts {
     position: absolute;
     width: 100%;
@@ -32,8 +39,8 @@ body {
     background-position-x: 170px; 
 }
 .top_wave {
-    background: url(../svg/top_wave.png) repeat-x;
-    height: 36px;
+    background: url(../svg/top_wave.png) repeat-x 0 -1px;
+    height: 35px;
     bottom: 0;
     z-index: 10001;
 }
@@ -119,6 +126,8 @@ body {
 }
 .sticks {
     z-index: 1011;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .stick {
     height: 362px;

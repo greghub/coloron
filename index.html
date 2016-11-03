@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Coloron: if you score 99 - you're a nerd</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
         <link rel="stylesheet" type="text/css" href="public/css/app.css">  
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -121,13 +121,14 @@
             var game = new Game();
             var animation = new Animation();
             var color = new Color();
+            var userAgent = window.navigator.userAgent;
 
             Animation.generateSmallGlows(20);
 
             $(document).ready(function(){
-                game.intro();
                 //game.showResult();
                 game.scaleScreen();
+                game.intro();
                 //game.start();
                 //game.bounce();
             })
@@ -151,11 +152,14 @@
             });
 
             $(window).resize(function(){
-                //game.resizeScreen();
-                game.scaleScreen();
+                if (!userAgent.match(/iPad/i) && !userAgent.match(/iPhone/i)) {
+                    game.scaleScreenAndRun();
+                }
+            });
 
-            })
-
+            $(window).on("orientationchange",function(){
+                game.scaleScreenAndRun();
+            });
         </script>
 
     </body>
