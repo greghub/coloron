@@ -1,58 +1,3 @@
-@media screen and (max-width: 640px) {
-  .glow {
-    width: 240px;
-    height: 240px;
-    left: -90px;
-    top: -90px; }
-  .sun {
-    box-shadow: 0 0 20px 20px #ffe345, 0 0 150px 150px rgba(103, 244, 210, 0.4); }
-  .small-glow {
-    transform: scale(0.5); }
-  .waves div {
-    background-size: auto 100%; }
-  .wave1, .wave2, .wave3, .wave4 {
-    height: 80px; }
-  .top_wave {
-    height: 20px; }
-  .wave1 {
-    bottom: -20px; }
-  .wave2 {
-    bottom: 10px; }
-  .wave3 {
-    bottom: 40px; }
-  .wave4 {
-    bottom: 60px; }
-  .mount1 {
-    background-size: auto 80%;
-    height: 80px;
-    bottom: 120px; }
-  .mount2 {
-    background-size: auto 80%;
-    height: 120px;
-    bottom: 130px; }
-  .clouds {
-    top: 25px;
-    height: 60px;
-    background-size: auto 100%; } }
-
-@media screen and (max-width: 320px) {
-  .rotate {
-    position: fixed;
-    z-index: 99999;
-    background-color: #28DAD4;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    color: #fff; }
-  .rotate:before {
-    display: block;
-    content: " ";
-    height: 40%; } }
-
 .bubble {
   border-radius: 50%;
   position: absolute;
@@ -477,8 +422,10 @@ body {
   overflow: hidden;
   font-family: 'Roboto', sans-serif; }
 
-.rotate {
-  display: none; }
+a {
+  cursor: url(../svg/cursor.svg), pointer; }
+  a:focus, a:active {
+    cursor: url(../svg/cursor-tap.svg), pointer; }
 
 .container {
   position: fixed;
@@ -652,6 +599,23 @@ body {
 
 .start-game .start-game-top {
   min-height: 20%; }
+  .start-game .start-game-top .play-full-page {
+    display: none;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    color: #fff;
+    width: 260px;
+    height: 50px;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 52px;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 24px; }
+    .start-game .start-game-top .play-full-page:hover {
+      opacity: 0.7; }
 
 .start-game .logo-holder {
   width: 513px;
@@ -678,7 +642,7 @@ body {
     background-color: #FF4571;
     border: 4px solid #fff;
     border-radius: 100px;
-    color: white;
+    color: #fff;
     width: 200px;
     height: 56px;
     font-size: 42px;
@@ -690,7 +654,8 @@ body {
     .start-game .logo-holder .play-button:hover {
       background-color: #ff5f84; }
   .start-game .logo-holder .hint {
-    color: #fff; }
+    color: #fff;
+    font-size: 20px; }
     .start-game .logo-holder .hint span {
       color: #FF4571; }
 
@@ -705,7 +670,7 @@ body {
   .start-game .how-to-play h4 {
     color: #fff;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 22px;
     text-align: center; }
   .start-game .how-to-play .content {
     height: 200px;
@@ -791,12 +756,27 @@ body {
       font-weight: 900;
       letter-spacing: -1px;
       font-size: 26px;
-      padding: 6px 48px;
+      padding: 6px 24px;
       border-radius: 22px;
-      margin-top: 6px;
+      margin: 6px 4px;
       display: inline-block; }
       .stop-game .score-container .play-again:hover {
         background-color: #ff5f84; }
+    .stop-game .score-container .main-menu {
+      background-color: #44BFA3;
+      border: 2px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: -1px;
+      font-size: 26px;
+      padding: 6px 24px;
+      border-radius: 22px;
+      margin: 6px 4px;
+      display: inline-block; }
+      .stop-game .score-container .main-menu:hover {
+        background-color: #57c6ac; }
 
 .scene {
   display: flex;
@@ -822,3 +802,14 @@ body {
     font-size: 90px;
     font-weight: 900;
     letter-spacing: -0.1em; }
+  .scene .learn-to-play {
+    z-index: 9999;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    top: 20%;
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 700;
+    letter-spacing: -2px;
+    opacity: 0; }

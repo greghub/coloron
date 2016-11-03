@@ -1,5 +1,4 @@
 @import "mixins";
-@import "responsive";
 @import "shapes";
 
 body {
@@ -9,8 +8,11 @@ body {
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
 }
-.rotate {
-    display: none;
+a {
+    cursor: url(../svg/cursor.svg), pointer;
+    &:focus, &:active {
+    cursor: url(../svg/cursor-tap.svg), pointer;
+    }
 }
 .container {
     position: fixed;
@@ -187,6 +189,25 @@ body {
 .start-game {
     .start-game-top {
         min-height: 20%;
+        .play-full-page {
+            display: none;
+            border: 3px solid #fff;
+            border-radius: 100px;
+            color: #fff;
+            width: 260px;
+            height: 50px;
+            font-size: 28px;
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 52px;
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-top: 24px;
+            &:hover {
+                opacity: 0.7;
+            }
+        }
     }
     .logo-holder {
         width: 513px;
@@ -215,7 +236,7 @@ body {
             background-color: #FF4571;
             border: 4px solid #fff;
             border-radius: 100px;
-            color: white;
+            color: #fff;
             width: 200px;
             height: 56px;
             font-size: 42px;
@@ -230,6 +251,7 @@ body {
         }
         .hint {
             color: #fff;
+            font-size: 20px;
             span {
                 color: #FF4571;
             }
@@ -248,7 +270,7 @@ body {
         h4 {
             color: #fff;
             font-weight: 400;
-            font-size: 18px;
+            font-size: 22px;
             text-align: center;
         }
         .content {
@@ -356,12 +378,29 @@ body {
             font-weight: 900;
             letter-spacing: -1px;
             font-size: 26px;
-            padding: 6px 48px;
+            padding: 6px 24px;
             border-radius: 22px;
-            margin-top: 6px;
+            margin: 6px 4px;
             display: inline-block;
             &:hover {
                 background-color: lighten(#FF4571, 5%);
+            }
+        }
+        .main-menu {
+            background-color: #44BFA3;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -1px;
+            font-size: 26px;
+            padding: 6px 24px;
+            border-radius: 22px;
+            margin: 6px 4px;
+            display: inline-block;
+            &:hover {
+                background-color: lighten(#44BFA3, 5%);
             }
         }
     }
@@ -391,5 +430,17 @@ body {
         font-size: 90px;
         font-weight: 900;
         letter-spacing: -0.1em;
+    }
+    .learn-to-play {    
+        z-index: 9999;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        top: 20%;
+        font-size: 48px;
+        color: rgba(255,255,255,0.85);
+        font-weight: 700;
+        letter-spacing: -2px;
+        opacity: 0;
     }
 }

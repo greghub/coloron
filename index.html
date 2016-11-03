@@ -3,12 +3,32 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Coloron: if you score 99 - you're a nerd</title>
-        <meta name="description" content="">
+        <title>COLORON: inspiring developers to use SVG Animations, ES6 and Flexbox</title>
+        <meta name="description" content="A game made to inspire developers to use GSAP, ES6 and Flexbox">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
         <link rel="stylesheet" type="text/css" href="public/css/app.css">  
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+        <link rel="apple-touch-icon" href="public/images/touch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="public/images/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="public/images/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="public/images/touch-icon-ipad-retina.png">
+
+        <meta name="A game made to inspire developers to use GSAP, ES6 and Flexbox" />
+        <meta name="twitter:card" content="COLORON: inspiring developers to use SVG Animations, ES6 and Flexbox">
+        <meta name="twitter:site" content="@greghvns">
+        <meta name="twitter:title" content="Snack animation">
+        <meta name="twitter:description" content="A game made to inspire developers to use GSAP, ES6 and Flexbox">
+        <meta name="twitter:creator" content="@greghvns">
+        <meta name="twitter:image" content="public/images/coloron.jpg">
+
+        <meta property="og:image" content="https://greghub.github.io/snack-animation/snack.png" itemprop="thumbnailUrl">
+        <meta property="og:title" content="COLORON: inspiring developers to use SVG Animations, ES6 and Flexbox">
+        <meta property="og:url" content="https://greghub.github.io/coloron/">
+        <meta property="og:site_name" content="CodePen">
+        <meta property="og:description" content="A game made to inspire developers to use GSAP, ES6 and Flexbox">
+
     </head>
     <body>
 
@@ -16,7 +36,7 @@
 
             <div class="start-game game-full-flex" id="start-game">
                 
-                <div class="start-game-top"></div>    
+                <div class="start-game-top"><a class="play-full-page" href="#">Full Page Mode</a></div>    
 
                 <div class="logo-holder">
                     <p class="logo">
@@ -75,13 +95,14 @@
                         </a>
                     </p>
 
-                    <a class="play-again" href="#" onclick="game.start()">Play Again</a>
+                    <div>
+                        <a class="play-again" href="#" onclick="game.start()">Play Again</a>
+                        <a class="main-menu" href="#" onclick="game.intro()">Menu</a>
+                    </div>
 
                 </div>
 
             </div>
-
-            <div class="rotate">Please rotate your device</div>
 
             <div class="small-glows"></div>
 
@@ -103,6 +124,7 @@
             <div class="clouds"></div>
 
             <div class="scene">
+                <div class="learn-to-play">Click on the bars to change the color!</div>
                 <div class="score" id="score"></div>
                 <div class="ball-holder"></div>
                 <div class="sticks" id="sticks"></div>
@@ -113,10 +135,9 @@
         </div>
 
         <script src="public/js/jquery-3.1.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="assets/js/jquery-3.1.0.min.js"><\/script>')</script>
         <script src="public/js/TweenMax.min.js"></script>
-        <!-- <script src="public/js/app.js"></script> -->
-        <script src="resources/assets/js/app.js"></script>
+        <script src="public/js/app.js"></script>
+        <!-- <script src="resources/assets/js/app.js"></script> -->
         <script>
             var game = new Game();
             var animation = new Animation();
@@ -162,5 +183,14 @@
             });
         </script>
 
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-86833585-1', 'auto');
+            ga('send', 'pageview');
+        </script>
     </body>
 </html>

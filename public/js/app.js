@@ -9,22 +9,48 @@ var Game = function () {
         _classCallCheck(this, Game);
 
         this.score = 0;
-        this.screen = $(window).width(); // screen width
-        this.steps = Math.floor(this.screen / 180); // how many steps (stick width + margin) it takes from one end to another
-        this.timeline = new TimelineMax({ smoothChildTiming: true });
-        this.time = 1.5;
-        this.colors = ["#FF4571", "#FFD145", "#8260F6"];
-        this.colorsRGBA = ["rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)"];
-        this.color = this.colors[0];
-        this.prevColor = null;
+        this.isRunning = 0; // game is not running
 
-        $('#sticks').width((this.steps + 3) * 180);
+        this.calculateScale();
+
+        this.timeline = new TimelineMax({ smoothChildTiming: true });
+        this.time = 1.6; // initial speed
+        this.colors = ["#FF4571", "#FFD145", "#8260F6"]; // the 3 colors used in the game
+        this.colorsRGBA = ["rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)"];
+        this.color = this.colors[0]; // the intial color of the ball
+        this.prevColor = null; // used as a holder to prevent ball colors from repeating
     }
 
+    /**
+     * The game screen is scalable. I took 1200x800px as the initial scale.
+     * In order to display the game an many screen sizes properly
+     * I have to compare the player's sreen size to the initial scale,
+     * then scale the game using CSS Transform to fit the screen properly
+     * The function is called in the controller and anywhere where I need
+     * to recalculate the scale on screen resize or device rotation
+     */
+
+
     _createClass(Game, [{
+        key: "calculateScale",
+        value: function calculateScale() {
+            this.screen = $(window).width(); // screen width
+            this.screenHeight = $(window).height();
+            this.scale = this.screen > this.screenHeight ? this.screenHeight / 800 : this.screen / 1200;
+            this.stickWidth = 180 * this.scale;
+            this.steps = this.screen / this.stickWidth; // how many steps (stick width + margin) it takes from one end to another
+        }
+
+        /**
+         * Creating as many sticks we need to fill the screen
+         * from start to end of the screen. The steps property is used for that
+         */
+
+    }, {
         key: "generateSticks",
         value: function generateSticks() {
-            for (var i = 0; i <= this.steps; i++) {
+            var numberOfSticks = Math.ceil(this.steps);
+            for (var i = 0; i <= numberOfSticks; i++) {
                 new Stick();
             }
         }
@@ -40,27 +66,42 @@ var Game = function () {
         value: function generateTweet() {
             var top = $(window).height() / 2 - 150;
             var left = $(window).width() / 2 - 300;
-            window.open("https://twitter.com/intent/tweet?url=http://codepen.io/greghvns/&amp;text=I scored " + this.score + " points on Coloron! Can you beat my score? @friends_names&amp;via=greghvns&amp;hashtags=coloron", "TweetWindow", "width=600px,height=300px,top=" + top + ",left=" + left);
+            window.open("https://twitter.com/intent/tweet?url=https://greghub.github.io/coloron/&amp;text=I scored " + this.score + " points on Coloron! Can you beat my score? @friends_names&amp;via=greghvns&amp;hashtags=coloron", "TweetWindow", "width=600px,height=300px,top=" + top + ",left=" + left);
         }
+
+        /**
+         * The greeting when the game begins
+         */
+
     }, {
         key: "intro",
         value: function intro() {
             var _this = this;
 
+            TweenMax.killAll();
+
+            $('.stop-game').css('display', 'none');
             $('.start-game').css('display', 'flex');
+
             var intro = new TimelineMax();
             var ball = new TimelineMax({ repeat: -1, delay: 3 });
             intro.fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 }).staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08).staggerFromTo('.start-game .bar', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08).staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2);
 
-            ball.to('.start-game .section-1 .ball-demo', 0.5, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn }).to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,
+            ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn }).to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,
                 onStart: function onStart() {
                     while (_this.prevColor == _this.color) {
                         _this.color = new Color().getRandomColor();
                     }
                     _this.prevColor = _this.color;
                     TweenMax.to('.start-game .section-1 .ball-demo', 0.5, { backgroundColor: _this.color });
-                } });
+                }
+            });
         }
+
+        /**
+        * Display score
+         */
+
     }, {
         key: "showResult",
         value: function showResult() {
@@ -72,6 +113,13 @@ var Game = function () {
             var resultTimeline = new TimelineMax();
             resultTimeline.fromTo('.stop-game .score-container', 0.7, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, ease: Elastic.easeOut.config(1.25, 0.5) }).fromTo('.stop-game .final-score', 2, { scale: 0.5 }, { scale: 1, ease: Elastic.easeOut.config(2, 0.5) }, 0).fromTo('.stop-game .result', 1, { scale: 0.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) }, 0.3);
         }
+
+        /**
+         * Takes players score and generates the cheering copy
+         * @param  {int} score
+         * @return {string} grade
+         */
+
     }, {
         key: "showGrade",
         value: function showGrade(score) {
@@ -81,19 +129,26 @@ var Game = function () {
         key: "start",
         value: function start() {
 
-            this.stop();
+            this.stop(); // stop the game
 
-            $('.start-game, .stop-game').css('display', 'none');
+            $('.start-game, .stop-game').css('display', 'none'); // hide all the popups
 
             new Game();
+            this.score = 0; // reset
 
-            this.score = 0;
+            this.isRunning = 1;
+
+            // Clean up the stick and ball holders
+            // and generate new ones
             $('#sticks, .scene .ball-holder').html('');
             $('#score').text(this.score);
             this.generateSticks();
             this.generateBall();
 
-            Animation.sceneAnimation();
+            // disables scene animations for Phones
+            if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent)) {
+                Animation.sceneAnimation();
+            }
             this.moveToStart();
             this.moveScene();
 
@@ -105,15 +160,63 @@ var Game = function () {
         key: "stop",
         value: function stop() {
 
+            this.isRunning = 0;
+
+            $('.start-game, .stop-game').css('display', 'none');
             $('#sticks, .scene .ball-holder, #score').html('');
             TweenMax.killAll();
 
             this.showResult();
         }
     }, {
+        key: "scaleScreen",
+        value: function scaleScreen() {
+
+            TweenMax.killAll(); // prevent multiple calls on resize
+
+            var height = $(window).height();
+            var width = $(window).width();
+
+            this.calculateScale();
+
+            $('.container').css('transform', 'scale(' + this.scale + ')').css('height', height / this.scale).css('width', width / this.scale).css('transformOrigin', 'left top');
+
+            $('#sticks').width(this.screen / this.scale + 3 * this.stickWidth / this.scale);
+        }
+
+        /**
+         * Calls the above function
+         * If the game is running it stops and shows the score
+         * If the game has stops it takes player to the main menu
+         */
+
+    }, {
+        key: "scaleScreenAndRun",
+        value: function scaleScreenAndRun() {
+
+            this.scaleScreen();
+
+            if (this.isRunning) {
+                this.stop();
+            } else {
+                this.intro();
+            }
+        }
+
+        /**
+         * This is the initial animation
+         * where the sticks come to the starting position
+         * and the ball appears and falls down
+         */
+
+    }, {
         key: "moveToStart",
         value: function moveToStart() {
             var _this2 = this;
+
+            var tip = new TimelineMax({ delay: 2 });
+
+            tip.fromTo('.learn-to-play', 1, { scale: 0 }, { scale: 1, opacity: 1, ease: Elastic.easeOut.config(1.25, 0.5) }).to('.learn-to-play', 1, { scale: 0, opacity: 0, ease: Elastic.easeOut.config(1.25, 0.5) }, 3);
 
             TweenMax.fromTo('#ball', this.time, {
                 scale: 0
@@ -125,8 +228,13 @@ var Game = function () {
                 }
             });
 
-            this.timeline.add(TweenMax.fromTo('#sticks', this.time * this.steps, { x: this.screen }, { x: 0, ease: Power0.easeNone }));
+            this.timeline.add(TweenMax.fromTo('#sticks', this.time * this.steps, { x: this.screen / this.scale }, { x: 0, ease: Power0.easeNone }));
         }
+
+        /**
+         * The animation that moves sticks
+         */
+
     }, {
         key: "moveScene",
         value: function moveScene() {
@@ -154,6 +262,13 @@ var Game = function () {
             $('#sticks .stick').first().remove();
             new Stick();
         }
+
+        /**
+         * The game speeds up based on score
+         * The GSAP timeScale() function is called on the timeline to speed up the game
+         * This calculates how much shall the game speed up
+         */
+
     }, {
         key: "speedUp",
         value: function speedUp() {
@@ -176,16 +291,23 @@ var Game = function () {
             }
             return 1;
         }
+
+        /**
+         * Ball bouncing animation
+         * It checks if the ball and stick colors match
+         * And changes the ball color
+         */
+
     }, {
         key: "bounce",
         value: function bounce() {
             var _this4 = this;
 
-            this.balltween.to('#ball', this.time / 2, { y: '+=200px', scaleY: 0.7, transformOrigin: "bottom", ease: Power2.easeIn,
+            this.balltween.to('#ball', this.time / 2, { y: '+=250px', scaleY: 0.7, transformOrigin: "bottom", ease: Power2.easeIn,
                 onComplete: function onComplete() {
                     _this4.checkColor();
                 }
-            }).to('#ball', this.time / 2, { y: '-=200px', scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeOut,
+            }).to('#ball', this.time / 2, { y: '-=250px', scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeOut,
                 onStart: function onStart() {
                     while (_this4.prevColor == _this4.color) {
                         _this4.color = new Color().getRandomColor();
@@ -208,6 +330,7 @@ var Game = function () {
                 if ($(this).offset().left < ballPos && $(this).offset().left > ballPos - stickWidth) {
 
                     if (Color.getColorFromClass($(this)) == Color.getColorFromClass('#ball')) {
+                        // if matches increase the score
                         score++;
                         $('#score').text(score);
                         TweenMax.fromTo('#score', 0.5, { scale: 1.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) });
@@ -239,11 +362,6 @@ var Stick = function () {
             this.stick = $('#sticks').append('<div class="stick inactive"></div>');
             return this.stick;
         }
-    }, {
-        key: "setHeight",
-        value: function setHeight() {
-            this.stick.css('height', '50px');
-        }
     }]);
 
     return Stick;
@@ -261,8 +379,8 @@ var Color = function () {
     _createClass(Color, [{
         key: "getRandomColor",
         value: function getRandomColor() {
-            var colorIndex = Math.random() * 2;
-            var color = this.colors[Math.round(colorIndex)];
+            var colorIndex = Math.random() * 3;
+            var color = this.colors[Math.floor(colorIndex)];
             return color;
         }
     }, {
@@ -274,6 +392,12 @@ var Color = function () {
             if (index == -1) return false;
             return names[index];
         }
+
+        /**
+         * Changes the color of an element
+         * As we as adds verbal name of the color
+         */
+
     }, {
         key: "changeColor",
         value: function changeColor(el) {
@@ -299,12 +423,20 @@ var Color = function () {
         key: "getRandomEffect",
         value: function getRandomEffect() {
             var effectIndex = null;
+
+            effectIndex = Math.floor(Math.random() * 3);
             while (effectIndex == this.prevEffect) {
-                effectIndex = Math.random() * 2;
+                effectIndex = Math.floor(Math.random() * 3);
             }
+
             this.prevEffect = effectIndex;
-            return this.effects[Math.round(effectIndex)];
+            return this.effects[effectIndex];
         }
+
+        /**
+         * Adds the effect specific particles to the stick
+         */
+
     }, {
         key: "setEffect",
         value: function setEffect(el) {
@@ -318,10 +450,15 @@ var Color = function () {
                 }
             }
         }
+
+        /**
+         * Since the ball and sticks have several classes
+         * This method searches for the color class
+         * @param el [DOM element]
+         * @return {string} class name
+         */
+
     }], [{
-        key: "addColorClass",
-        value: function addColorClass(el) {}
-    }, {
         key: "getColorFromClass",
         value: function getColorFromClass(el) {
             var classes = $(el).attr('class').split(/\s+/);
@@ -343,6 +480,14 @@ var Animation = function () {
 
     _createClass(Animation, [{
         key: "playBubble",
+
+
+        /**
+         * Creates the animations for sticks
+         * The effects is chosen by random
+         * And one of the three functions is
+         * Called accordingly
+         */
         value: function playBubble(el) {
             var bubble = new TimelineMax();
             bubble.staggerFromTo(el.find('.bubble'), 0.3, { scale: 0.1 }, { scale: 1 }, 0.03);
@@ -384,14 +529,23 @@ var Animation = function () {
         }
     }], [{
         key: "generateSmallGlows",
+
+
+        /**
+         * Creates and positions the small glow elements on the screen
+         */
         value: function generateSmallGlows(number) {
             var h = $(window).height();
             var w = $(window).width();
+            var scale = w > h ? h / 800 : w / 1200;
+
+            h = h / scale;
+            w = w / scale;
 
             for (var i = 0; i < number; i++) {
-                var left = Math.round(Math.random() * w);
-                var top = Math.round(Math.random() * (h / 2));
-                var size = Math.round(Math.random() * 8) + 4;
+                var left = Math.floor(Math.random() * w);
+                var top = Math.floor(Math.random() * (h / 2));
+                var size = Math.floor(Math.random() * 8) + 4;
                 $('.small-glows').prepend('<div class="small-glow"></div>');
                 var noise = $('.small-glows .small-glow').first();
                 noise.css({ left: left, top: top, height: size, width: size });
@@ -401,11 +555,12 @@ var Animation = function () {
         key: "sceneAnimation",
         value: function sceneAnimation() {
 
-            var speed = 15;
+            var speed = 15; // uses it's local speed
 
+            // animates the small glows in a circular motion
             $('.small-glow').each(function () {
-                var speedDelta = Math.round(Math.random() * 8);
-                var radius = Math.round(Math.random() * 20) + 20;
+                var speedDelta = Math.floor(Math.random() * 8);
+                var radius = Math.floor(Math.random() * 20) + 20;
                 TweenMax.to($(this), speed + speedDelta, { rotation: 360, transformOrigin: "-" + radius + "px -" + radius + "px", repeat: -1, ease: Power0.easeNone });
             });
 

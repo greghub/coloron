@@ -1,21 +1,27 @@
 class Game {
 
     constructor() {
-
-
         this.score = 0;
-        this.isRunning = 0;
+        this.isRunning = 0; // game is not running
 
         this.calculateScale();
 
         this.timeline = new TimelineMax({smoothChildTiming: true});
-        this.time = 1; // initial speed
-        this.colors = ["#FF4571", "#FFD145", "#8260F6"];
+        this.time = 1.6; // initial speed
+        this.colors = ["#FF4571", "#FFD145", "#8260F6"]; // the 3 colors used in the game
         this.colorsRGBA = ["rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)", "rgba(255, 69, 113, 1)"];
-        this.color = this.colors[0];
-        this.prevColor = null;
+        this.color = this.colors[0]; // the intial color of the ball
+        this.prevColor = null; // used as a holder to prevent ball colors from repeating
     }
 
+    /**
+     * The game screen is scalable. I took 1200x800px as the initial scale.
+     * In order to display the game an many screen sizes properly
+     * I have to compare the player's sreen size to the initial scale,
+     * then scale the game using CSS Transform to fit the screen properly
+     * The function is called in the controller and anywhere where I need
+     * to recalculate the scale on screen resize or device rotation
+     */
     calculateScale() {
         this.screen = $(window).width(); // screen width
         this.screenHeight = $(window).height();
@@ -24,6 +30,10 @@ class Game {
         this.steps = this.screen/this.stickWidth; // how many steps (stick width + margin) it takes from one end to another
     }
 
+    /**
+     * Creating as many sticks we need to fill the screen
+     * from start to end of the screen. The steps property is used for that
+     */
     generateSticks() {
         let numberOfSticks = Math.ceil(this.steps);
         for(let i = 0; i <= numberOfSticks; i++)
@@ -39,15 +49,21 @@ class Game {
     generateTweet() {
         let top = $(window).height() / 2 - 150;
         let left = $(window).width() / 2 - 300;
-        window.open("https://twitter.com/intent/tweet?url=http://codepen.io/greghvns/&amp;text=I scored "+ this.score +" points on Coloron! Can you beat my score? @friends_names&amp;via=greghvns&amp;hashtags=coloron", "TweetWindow", "width=600px,height=300px,top=" + top + ",left=" + left);
+        window.open("https://twitter.com/intent/tweet?url=https://greghub.github.io/coloron/&amp;text=I scored "+ this.score +" points on Coloron! Can you beat my score? @friends_names&amp;via=greghvns&amp;hashtags=coloron", "TweetWindow", "width=600px,height=300px,top=" + top + ",left=" + left);
     }
 
+    /**
+     * The greeting when the game begins
+     */
     intro() {
+
+        TweenMax.killAll();
 
         $('.stop-game').css('display', 'none');
         $('.start-game').css('display', 'flex');
+
         let intro = new TimelineMax();
-        let ball = new TimelineMax({repeat: -1, delay: 3})
+        let ball = new TimelineMax({repeat: -1, delay: 3});
         intro
             .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
             .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
@@ -55,7 +71,7 @@ class Game {
             .staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2)
 
 
-        ball.to('.start-game .section-1 .ball-demo', 0.5, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn})
+        ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn})
             .to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,  
                     onStart: () => {
                         while(this.prevColor==this.color) {
@@ -67,6 +83,9 @@ class Game {
                 });
     }
 
+    /**
+    * Display score
+     */
     showResult() {
         let score = this.score;
         $('.stop-game').css('display', 'flex');
@@ -82,6 +101,11 @@ class Game {
 
     }
 
+    /**
+     * Takes players score and generates the cheering copy
+     * @param  {int} score
+     * @return {string} grade
+     */
     showGrade(score) {
         if(score > 30) return "Chuck Norris?";
         else if(score > 25) return "You're da man";
@@ -95,20 +119,23 @@ class Game {
 
     start() {
 
-        this.stop();
+        this.stop(); // stop the game
 
-        $('.start-game, .stop-game').css('display', 'none');
+        $('.start-game, .stop-game').css('display', 'none'); // hide all the popups
 
         new Game();
+        this.score = 0; // reset
 
         this.isRunning = 1;
 
-        this.score = 0;
+        // Clean up the stick and ball holders
+        // and generate new ones
         $('#sticks, .scene .ball-holder').html('');
         $('#score').text(this.score);
         this.generateSticks();
         this.generateBall();
 
+        // disables scene animations for Phones
         if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent) ) {
             Animation.sceneAnimation();
         }
@@ -146,14 +173,16 @@ class Game {
                 .css('width', width/this.scale)
                 .css('transformOrigin', 'left top');
 
-
-
         $('#sticks').width(this.screen/this.scale + 3 * this.stickWidth/this.scale);
 
     }
 
+    /**
+     * Calls the above function
+     * If the game is running it stops and shows the score
+     * If the game has stops it takes player to the main menu
+     */
     scaleScreenAndRun() {
-
 
         this.scaleScreen();
 
@@ -165,8 +194,18 @@ class Game {
 
     }
 
-
+    /**
+     * This is the initial animation
+     * where the sticks come to the starting position
+     * and the ball appears and falls down
+     */
     moveToStart() {        
+
+        let tip = new TimelineMax({ delay: 2 });
+
+        tip
+            .fromTo('.learn-to-play', 1, { scale: 0 }, { scale: 1, opacity: 1, ease: Elastic.easeOut.config(1.25, 0.5) })
+            .to('.learn-to-play', 1, { scale: 0, opacity: 0, ease: Elastic.easeOut.config(1.25, 0.5) }, 3)
 
         TweenMax.fromTo('#ball', this.time,
                         { 
@@ -185,6 +224,9 @@ class Game {
         );
     }
 
+    /**
+     * The animation that moves sticks
+     */
     moveScene() {
 
         this.timeline.add(
@@ -209,6 +251,11 @@ class Game {
 
     }
 
+    /**
+     * The game speeds up based on score
+     * The GSAP timeScale() function is called on the timeline to speed up the game
+     * This calculates how much shall the game speed up
+     */
     speedUp() {
         if(this.score > 30) {
             return 1.8;
@@ -234,6 +281,11 @@ class Game {
         return 1;
     }
 
+    /**
+     * Ball bouncing animation
+     * It checks if the ball and stick colors match
+     * And changes the ball color
+     */
     bounce() {
 
         this.balltween
@@ -266,6 +318,7 @@ class Game {
             if($(this).offset().left < ballPos && $(this).offset().left > (ballPos - stickWidth)) {
                 
                 if( Color.getColorFromClass($(this)) == Color.getColorFromClass('#ball') ) {
+                    // if matches increase the score
                     score++;
                     $('#score').text(score);
                     TweenMax.fromTo('#score', 0.5, { scale: 1.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) });
@@ -295,10 +348,6 @@ class Stick {
         return this.stick;
     }
 
-    setHeight() {
-        this.stick.css('height', '50px');
-    }
-
 }
 
 class Color {
@@ -323,6 +372,10 @@ class Color {
         return names[index];
     }      
 
+    /**
+     * Changes the color of an element
+     * As we as adds verbal name of the color
+     */
     changeColor(el) {
         let index = el.data("index");
         if(index===undefined) { index = 0; }
@@ -357,6 +410,9 @@ class Color {
         return this.effects[effectIndex];
     }   
 
+    /**
+     * Adds the effect specific particles to the stick
+     */
     setEffect(el) {
         let effect = this.getRandomEffect();
         el.addClass(effect + '-stick');
@@ -369,6 +425,12 @@ class Color {
         }
     }
 
+    /**
+     * Since the ball and sticks have several classes
+     * This method searches for the color class
+     * @param el [DOM element]
+     * @return {string} class name
+     */
     static getColorFromClass(el) {
         let classes = $(el).attr('class').split(/\s+/);
         for (var i = 0, len = classes.length; i < len; i++) {          
@@ -381,28 +443,41 @@ class Color {
 
 class Animation {
 
+    /**
+     * Creates and positions the small glow elements on the screen
+     */
     static generateSmallGlows(number) {
-        var h = $(window).height();
-        var w = $(window).width();
+        let h = $(window).height();
+        let w = $(window).width();
+        let scale = (w > h) ? h/800 : w/1200;
 
-        for(var i = 0; i < number; i++) {
-            var left = Math.floor(Math.random()*w);
-            var top = Math.floor(Math.random()*(h/2));
-            var size = Math.floor(Math.random()*8) + 4;
+        h = h/scale;
+        w = w/scale;
+
+        for(let i = 0; i < number; i++) {
+            let left = Math.floor(Math.random()*w);
+            let top = Math.floor(Math.random()*(h/2));
+            let size = Math.floor(Math.random()*8) + 4;
             $('.small-glows').prepend('<div class="small-glow"></div>');
-            var noise = $('.small-glows .small-glow').first();
+            let noise = $('.small-glows .small-glow').first();
             noise.css({left: left, top: top, height: size, width: size});
         }
     }
 
+    /**
+     * Creates the animations for sticks
+     * The effects is chosen by random
+     * And one of the three functions is
+     * Called accordingly
+     */
     playBubble(el) {
-        var bubble = new TimelineMax();
+        let bubble = new TimelineMax();
         bubble.staggerFromTo(el.find('.bubble'), 0.3, {scale: 0.1}, {scale: 1}, 0.03)
         bubble.staggerTo(el.find('.bubble'), 0.5, {y: '-=60px', yoyo: true, repeat: -1}, 0.03);
     }
 
     playTriangle(el) {
-        var triangle = new TimelineMax();
+        let triangle = new TimelineMax();
         triangle.staggerFromTo(el.find('.triangle'), 0.3, {scale: 0.1}, {scale: 1}, 0.03)
                 .staggerTo(el.find('.triangle'), 1.5, {
                     cycle:{
@@ -437,8 +512,9 @@ class Animation {
 
     static sceneAnimation() {
 
-        let speed = 15;
+        const speed = 15; // uses it's local speed
 
+        // animates the small glows in a circular motion
         $('.small-glow').each(function(){
             let speedDelta = Math.floor(Math.random()*8);
             let radius = Math.floor(Math.random()*20)+20;
