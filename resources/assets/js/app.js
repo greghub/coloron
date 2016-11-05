@@ -62,9 +62,9 @@ class Game {
         $('.stop-game').css('display', 'none');
         $('.start-game').css('display', 'flex');
 
-        let intro = new TimelineMax();
+        let introTl = new TimelineMax();
         let ball = new TimelineMax({repeat: -1, delay: 3});
-        intro
+        introTl
             .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
             .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
             .staggerFromTo('.start-game .bar', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08)
