@@ -62,25 +62,41 @@ class Game {
         $('.stop-game').css('display', 'none');
         $('.start-game').css('display', 'flex');
 
-        let introTl = new TimelineMax();
+        let introTl = new mojs.Timeline();
         let ball = new TimelineMax({repeat: -1, delay: 3});
+
+        const tween1 = new mojs.Tween({
+                duration: 900,
+                onUpdate: function (progress) {
+                    $('.logo-holder')[0].style.opacity = 1 * progress;
+                }
+            });        
+        const tween2 = new mojs.stagger({
+                duration: 900,
+                onUpdate: function (progress) {
+                    $('.logo-holder')[0].style.opacity = 1 * progress;
+                }
+            });
         introTl
-            .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
-            .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
-            .staggerFromTo('.start-game .bar', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08)
-            .staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2)
+            .add( tween1 );
+
+        introTl.play();
+            // .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
+            // .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
+            // .staggerFromTo('.start-game .bar', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08)
+            // .staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2)
 
 
-        ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn})
-            .to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,  
-                    onStart: () => {
-                        while(this.prevColor==this.color) {
-                            this.color = (new Color).getRandomColor();
-                        }
-                        this.prevColor = this.color;
-                        TweenMax.to('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
-                    } 
-                });
+        // ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn})
+        //     .to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,  
+        //             onStart: () => {
+        //                 while(this.prevColor==this.color) {
+        //                     this.color = (new Color).getRandomColor();
+        //                 }
+        //                 this.prevColor = this.color;
+        //                 TweenMax.to('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
+        //             } 
+        //         });
     }
 
     /**
