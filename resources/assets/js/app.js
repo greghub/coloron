@@ -522,16 +522,16 @@ class Animation {
             TweenMax.to($(this), speed+speedDelta, {rotation: 360, transformOrigin: "-"+radius+"px -"+radius+"px", repeat: -1, ease: Power0.easeNone});
         })
 
-        var wavet = TweenMax.to('.top_wave', speed*1.7/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
-        var wave1 = TweenMax.to('.wave1', speed*1.9/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
-        var wave2 = TweenMax.to('.wave2', speed*2/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
-        var wave3 = TweenMax.to('.wave3', speed*2.2/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
-        var wave4 = TweenMax.to('.wave4', speed*2.4/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+        // var wavet = TweenMax.to('.top_wave', speed*1.7/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+        // var wave1 = TweenMax.to('.wave1', speed*1.9/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+        // var wave2 = TweenMax.to('.wave2', speed*2/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+        // var wave3 = TweenMax.to('.wave3', speed*2.2/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+        // var wave4 = TweenMax.to('.wave4', speed*2.4/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
 
-        var mount1 = TweenMax.to('.mount1', speed*8, {backgroundPositionX: '-=1760px', repeat: -1, ease: Power0.easeNone});
-        var mount2 = TweenMax.to('.mount2', speed*10, {backgroundPositionX: '-=1782px', repeat: -1, ease: Power0.easeNone});
+        // var mount1 = TweenMax.to('.mount1', speed*8, {backgroundPositionX: '-=1760px', repeat: -1, ease: Power0.easeNone});
+        // var mount2 = TweenMax.to('.mount2', speed*10, {backgroundPositionX: '-=1782px', repeat: -1, ease: Power0.easeNone});
 
-        var clouds = TweenMax.to('.clouds', speed*3, {backgroundPositionX: '-=1001px', repeat: -1, ease: Power0.easeNone});   
+        // var clouds = TweenMax.to('.clouds', speed*3, {backgroundPositionX: '-=1001px', repeat: -1, ease: Power0.easeNone});   
 
     }
 

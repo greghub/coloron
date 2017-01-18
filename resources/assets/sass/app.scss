@@ -1,5 +1,6 @@
 @import "mixins";
 @import "shapes";
+@import "animations";
 
 body {
     background-color: #28DAD4;
@@ -7,6 +8,7 @@ body {
     padding: 0;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 body * {
@@ -50,48 +52,56 @@ a {
     height: 151px;
     background: url(../svg/clouds.svg) repeat-x;
     background-position-x: 170px; 
+    animation: clouds 45s linear infinite;
 }
 .top_wave {
     background: url(../svg/top_wave.png) repeat-x 0 -1px;
     height: 35px;
     bottom: 0;
     z-index: 10001;
+    @include wave_animation(0.6);
 }
 .wave1 {
     background: url(../svg/wave1.svg) repeat-x;
     height: 150px;
     bottom: 0;
     z-index: 23;
+    @include wave_animation(0.8);
 }
 .wave2 {
     background: url(../svg/wave2.svg) repeat-x;
     height: 180px;
     bottom: 30px;
     z-index: 22;
+    @include wave_animation(1);
 }
 .wave3 {
     background: url(../svg/wave3.svg) repeat-x;
     height: 180px;
     bottom: 90px;
     z-index: 21;
+    @include wave_animation(1.2);
 }
 .wave4 {
     background: url(../svg/wave4.svg) repeat-x;
     height: 180px;
     bottom: 120px;
     z-index: 20;
+    @include wave_animation(1.4);
 }
 .mount1 {
     background: url(../svg/mount1.svg) repeat-x;
     height: 150px;
     bottom: 280px;
     z-index: 11;
+    animation: mount1 120s linear infinite;
 }
 .mount2 {
     background: url(../svg/mount2.svg) repeat-x;
     height: 150px;
     bottom: 290px;
     z-index: 10;
+    animation: mount2 150s linear infinite;
 }
 .noise {
     position: fixed;

@@ -68,3 +68,10 @@
         box-sizing: border-box;
     }
 }
+
+@mixin wave_animation ($time) {
+    animation-name: wave;
+    animation-duration: #{$time}s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
