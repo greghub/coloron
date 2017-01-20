@@ -1172,9 +1172,8 @@ a {
       cursor: url(../svg/cursor-tap.svg), pointer; }
   .start-game .how-to-play .section-3 .ball-demo {
     background-color: #815FF8; }
-  .start-game .how-to-play .section-3 .bar-1 {
-    height: 120px;
-    background-color: #815FF8; }
+  .start-game .how-to-play .section-3 .stick {
+    margin: 26px 12px; }
 
 .stop-game {
   justify-content: center; }

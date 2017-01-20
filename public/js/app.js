@@ -86,12 +86,7 @@ var Game = function () {
             var introTl = new TimelineMax();
             var ball = new TimelineMax({ repeat: -1, delay: 3 });
 
-            // introTl
-            //     .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
-            //     .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
-            //     .staggerFromTo('.start-game .stick', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08)
-            //     .staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2)
-
+            introTl.fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 }).staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08).staggerFromTo('.start-game .stick', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08).staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2);
 
             ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn }).to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,
                 onStart: function onStart() {
@@ -105,13 +100,15 @@ var Game = function () {
             });
 
             var animation = new Animation();
-            var one = $('.how-to-play .content .stick.inactive:nth-child(1)');
-            var two = $('.how-to-play .content .stick.inactive:nth-child(2)');
-            var three = $('.how-to-play .content .stick.inactive:nth-child(3)');
+            var one = $('.how-to-play .section-2 .content .stick.inactive:nth-child(1)');
+            var two = $('.how-to-play .section-2 .content .stick.inactive:nth-child(2)');
+            var three = $('.how-to-play .section-2 .content .stick.inactive:nth-child(3)');
+            var four = $('.how-to-play .section-3 .content .stick.inactive');
 
             new Color().setColorAndEffect(one, 0, 'bubble');
             new Color().setColorAndEffect(two, 1, 'triangle');
             new Color().setColorAndEffect(three, 2, 'block');
+            new Color().setColorAndEffect(four, 2, 'block');
             // animation.playBubble(one);
             // animation.playTriangle(two);
             // animation.playBlock(three);
@@ -233,10 +230,6 @@ var Game = function () {
         value: function moveToStart() {
             var _this2 = this;
 
-            var tip = new TimelineMax({ delay: 2 });
-
-            tip.fromTo('.learn-to-play', 1, { scale: 0 }, { scale: 1, opacity: 1, ease: Elastic.easeOut.config(1.25, 0.5) }).to('.learn-to-play', 1, { scale: 0, opacity: 0, ease: Elastic.easeOut.config(1.25, 0.5) }, 3);
-
             TweenMax.fromTo('#ball', this.time, {
                 scale: 0
             }, {
@@ -352,6 +345,7 @@ var Game = function () {
                         // if matches increase the score
                         score++;
                         $('#score').text(score);
+                        $(this).addClass('touched');
                         TweenMax.fromTo('#score', 0.5, { scale: 1.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) });
                     } else {
 

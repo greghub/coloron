@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="section section-2">
-                    <h4>Tap on the bar to switch the colors<br>(Red, Yellow, Purple)</h4>
+                    <h4>Tap the screen to switch the colors of<br> the next bar (Red, Yellow, Purple)</h4>
                     <div class="content">
                         <div class="stick inactive"></div>
                         <div class="stick inactive"></div>
@@ -65,7 +65,7 @@
                     <h4>Always match the<br>ball and bar colors</h4>
                     <div class="content">
                         <div class="ball-demo" id="ball-demo"></div>
-                        <div class="bar bar-1"></div>
+                        <div class="stick inactive content-purple"></div>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,6 @@
         </div>
         <div class="clouds"></div>
         <div class="scene">
-            <div class="learn-to-play">Click on the bars to change the color!</div>
             <div class="score" id="score"></div>
             <div class="ball-holder"></div>
             <div class="sticks" id="sticks"></div>
@@ -156,19 +155,37 @@
         color.changeColor($(this));
     });
 
-    $(document).on('click', '.stick', function() {
-        color.changeColor($(this));
-        if ($(this).hasClass('no-effect')) {
-            if ($(this).hasClass('bubble-stick')) {
-                //animation.playBubble($(this));
-            } else if ($(this).hasClass('triangle-stick')) {
-                //animation.playTriangle($(this));
-            } else if ($(this).hasClass('block-stick')) {
-                //animation.playBlock($(this));
+    // $(document).on('click', '.stick', function() {
+    //     color.changeColor($(this));
+    //     if ($(this).hasClass('no-effect')) {
+    //         if ($(this).hasClass('bubble-stick')) {
+    //             //animation.playBubble($(this));
+    //         } else if ($(this).hasClass('triangle-stick')) {
+    //             //animation.playTriangle($(this));
+    //         } else if ($(this).hasClass('block-stick')) {
+    //             //animation.playBlock($(this));
+    //         }
+    //         $(this).removeClass('no-effect');
+    //     }
+    // });
+
+    $(document).on('click', '.scene', function(){
+        el = $('.sticks .stick:not(.touched)').first();
+
+        color.changeColor(el);
+        if (el.hasClass('no-effect')) {
+            if (el.hasClass('bubble-stick')) {
+                //animation.playBubble(el);
+            } else if (el.hasClass('triangle-stick')) {
+                //animation.playTriangle(el);
+            } else if (el.hasClass('block-stick')) {
+                //animation.playBlock(el);
             }
-            $(this).removeClass('no-effect');
+            el.removeClass('no-effect');
         }
-    });
+
+        //$('.stick:not(.touched)').first().trigger('click');
+    })
 
     $(document).on('click', '.section-2 .bar', function() {
         color.changeColor($(this));
