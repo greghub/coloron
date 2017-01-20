@@ -3,59 +3,45 @@
 }
 .bubble-1 {
     @include bubble(15px, 21px, 59px);
-    @include bubble_animation(0);
 }
 .bubble-2 {
     @include bubble(27px, 36px, 16px);
-    @include bubble_animation($stagger);
 }
 .bubble-3 {
     @include bubble(21px, 63px, 49px);
-    @include bubble_animation($stagger*2);
 }
 .bubble-4 {
     @include bubble(15px, 98px, 37px);
-    @include bubble_animation($stagger*3);
 }
 .bubble-5 {
     @include bubble_hollow(5px, 116px, 20px);
-    @include bubble_animation($stagger*4);
 }
 .bubble-6 {
     @include bubble(6px, 128px, 63px);
-    @include bubble_animation($stagger*5);
 }
 .bubble-7 {
     @include bubble(27px, 150px, 52px);
-    @include bubble_animation($stagger*6);
 }
 .bubble-8 {
     @include bubble(19px, 154px, 18px);
-    @include bubble_animation($stagger*7);
 }
 .bubble-9 {
     @include bubble(10px, 189px, 13px);
-    @include bubble_animation($stagger*8);
 }
 .bubble-10 {
     @include bubble_hollow(5px, 199px, 52px);
-    @include bubble_animation($stagger*9);
 }
 .bubble-11 {
     @include bubble(21px, 220px, 29px);
-    @include bubble_animation($stagger*10);
 }
 .bubble-12 {
     @include bubble(21px, 263px, 48px);
-    @include bubble_animation($stagger*11);
 }
 .bubble-13 {
     @include bubble_hollow(5px, 275px, 16px);
-    @include bubble_animation($stagger*12);
 }
 .bubble-14 {
     @include bubble(15px, 296px, 34px);
-    @include bubble_animation($stagger*13);
 }
 .triangle {
     position: absolute;
@@ -65,77 +51,63 @@
 .triangle-1 {
     @include bubble_shape;
     @include bubble(10px, 22px, 55px);
-    @include triangle_animation("X", 0);
 }
 .triangle-2 {
     @include triangle_hollow(16px, 14px, 27px, 15px);
-    @include triangle_animation("Y", $stagger-long);
 }
 .triangle-3 {
     @include triangle_hollow(24px, 20px, 60px, 43px);
-    @include triangle_animation("X", $stagger-long*2);
 }
 .triangle-4 {
     @include bubble_shape(3px);
     @include bubble_hollow(8px, 61px, 17px);
-    @include triangle_animation("Y", $stagger-long*3);
 }
 .triangle-5 {
     @include triangle(10px, 8px, 101px, 25px);
     transform: rotate(180deg);
-    @include triangle_animation("X", $stagger-long*4);
 }
 
 .triangle-6 {
     @include triangle(8px, 6px, 103px, 60px);
     transform: rotate(-90deg);
-    @include triangle_animation("Y", $stagger-long*5);
 }
 
 .triangle-7 {
     @include triangle(25px, 19px, 126px, 17px);
     transform: rotate(180deg);
-    @include triangle_animation("X", $stagger-long*6);
 }
 
 .triangle-8 {
     @include triangle(21px, 16px, 149px, 50px);
-    @include triangle_animation("Y", $stagger-long*7);
 }
 
 .triangle-9 {
     @include triangle(11px, 8px, 177px, 21px);
-    @include triangle_animation("Y", $stagger-long*8);
 }
 
 .triangle-10 {
     @include bubble_shape;
     @include bubble(10px, 177px, 60px);
-    @include triangle_animation("X", $stagger-long*9);
 }
 
 .triangle-11 {
     @include triangle(18px, 13px, 213px, 33px);
     transform: rotate(180deg);
-    @include triangle_animation("Y", $stagger-long*10);
 }
 
 .triangle-12 {
     @include bubble_shape(2px);
     @include bubble_hollow(10px, 233px, 65px);
-    @include triangle_animation("X", $stagger-long*11);
 }
 
 .triangle-13 {
     @include bubble_shape;
     @include bubble(10px, 250px, 22px);
-    @include triangle_animation("Y", $stagger-long*12);
 }
 
 .triangle-14 {
     @include triangle_hollow(16px, 14px, 270px, 45px);
     transform: rotate(180deg);
-    @include triangle_animation("X", $stagger-long*13);
 }
 
 .stick {
@@ -162,48 +134,27 @@
     }
     .block-1 {
         @include block_hollow(16px, 31px, 16px, 30px);
-        & .inner {
-            @include block_animation("R", 0);
-        } 
     }
     .block-2 {
         @include block(14px, 42px, 50px, 15px);
-        & .inner {
-            @include block_animation("L", $stagger);
-        }
     }
     .block-3 {
         @include block(18px, 9px, 73px, 64px);
-        & .inner {
-            @include block_animation("R", $stagger*2);
-        }
     }
     .block-4 {
         @include block(9px, 14px, 84px, 26px);
-        & .inner {
-            @include block_animation("L", $stagger*3);
-        }
     }
     .block-5 {
         @include block(15px, 15px, 109px, 45px);
-        & .inner {
-            @include block_animation("R", $stagger*4);
-        }
         .inner { 
             border-radius: 50%;
         }
     }
     .block-6 {
         @include block(9px, 27px, 135px, 19px);
-        & .inner {
-            @include block_animation("L", $stagger*5);
-        }
     }
     .block-7 {
         @include block(12px, 12px, 144px, 60px); 
-        & .inner {
-            @include block_animation("R", $stagger*6);
-        }
         .inner { 
             border-radius: 50%;
             border-style: solid;
@@ -213,56 +164,32 @@
     }
     .block-8 {
         @include block(27px, 14px, 164px, 24px);
-        & .inner {
-            @include block_animation("L", $stagger*7);
-        }
     }
     .block-9 {
         @include block(8px, 8px, 188px, 64px);
-        & .inner {
-            @include block_animation("R", $stagger*8);
-        }
     }
     .block-10 {
         @include block_hollow(12px, 22px, 219px, 11px);
-        & .inner {
-            @include block_animation("L", $stagger*9);
-        }
     }
     .block-11 {
         @include block(22px, 22px, 226px, 50px);
-        & .inner {
-            @include block_animation("R", $stagger*10);
-        }
         .inner {
             border-radius: 50%;
         }
     }
     .block-12 {
         @include block(18px, 9px, 248px, 26px);
-        & .inner {
-           @include block_animation("L", $stagger*11);
-        }
     }
     .block-13 {
         @include block(8px, 8px, 278px, 50px);
-        & .inner {
-            @include block_animation("R", $stagger*12);
-        }
         .inner {    
             border-radius: 50%;
         }
     }
     .block-14 {
         @include block_hollow(12px, 22px, 297px, 18px);
-        & .inner {
-            @include block_animation("L", $stagger*13);
-        }
     }
     .block-15 {
         @include block(9px, 27px, 307px, 48px);
-        & .inner {
-            @include block_animation("R", $stagger*14);
-        }
     }
 }
