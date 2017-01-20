@@ -9,25 +9,45 @@
   height: 15px;
   width: 15px;
   top: 21px;
-  left: 59px; }
+  left: 59px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite; }
 
 .bubble-2 {
   height: 27px;
   width: 27px;
   top: 36px;
-  left: 16px; }
+  left: 16px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.03s;
+  animation-iteration-count: infinite; }
 
 .bubble-3 {
   height: 21px;
   width: 21px;
   top: 63px;
-  left: 49px; }
+  left: 49px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.06s;
+  animation-iteration-count: infinite; }
 
 .bubble-4 {
   height: 15px;
   width: 15px;
   top: 98px;
-  left: 37px; }
+  left: 37px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.09s;
+  animation-iteration-count: infinite; }
 
 .bubble-5 {
   height: 5px;
@@ -35,31 +55,56 @@
   top: 116px;
   left: 20px;
   background-color: transparent;
-  border-style: solid; }
+  border-style: solid;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.12s;
+  animation-iteration-count: infinite; }
 
 .bubble-6 {
   height: 6px;
   width: 6px;
   top: 128px;
-  left: 63px; }
+  left: 63px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.15s;
+  animation-iteration-count: infinite; }
 
 .bubble-7 {
   height: 27px;
   width: 27px;
   top: 150px;
-  left: 52px; }
+  left: 52px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.18s;
+  animation-iteration-count: infinite; }
 
 .bubble-8 {
   height: 19px;
   width: 19px;
   top: 154px;
-  left: 18px; }
+  left: 18px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.21s;
+  animation-iteration-count: infinite; }
 
 .bubble-9 {
   height: 10px;
   width: 10px;
   top: 189px;
-  left: 13px; }
+  left: 13px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.24s;
+  animation-iteration-count: infinite; }
 
 .bubble-10 {
   height: 5px;
@@ -67,19 +112,34 @@
   top: 199px;
   left: 52px;
   background-color: transparent;
-  border-style: solid; }
+  border-style: solid;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.27s;
+  animation-iteration-count: infinite; }
 
 .bubble-11 {
   height: 21px;
   width: 21px;
   top: 220px;
-  left: 29px; }
+  left: 29px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.3s;
+  animation-iteration-count: infinite; }
 
 .bubble-12 {
   height: 21px;
   width: 21px;
   top: 263px;
-  left: 48px; }
+  left: 48px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.33s;
+  animation-iteration-count: infinite; }
 
 .bubble-13 {
   height: 5px;
@@ -87,13 +147,23 @@
   top: 275px;
   left: 16px;
   background-color: transparent;
-  border-style: solid; }
+  border-style: solid;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.36s;
+  animation-iteration-count: infinite; }
 
 .bubble-14 {
   height: 15px;
   width: 15px;
   top: 296px;
-  left: 34px; }
+  left: 34px;
+  animation-name: bubble;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.39s;
+  animation-iteration-count: infinite; }
 
 .triangle {
   position: absolute;
@@ -109,7 +179,12 @@
   height: 10px;
   width: 10px;
   top: 22px;
-  left: 55px; }
+  left: 55px;
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0s;
+  animation-iteration-count: infinite; }
 
 .triangle-2 {
   border-left: 8px solid transparent;
@@ -117,7 +192,12 @@
   border-bottom: 14px solid rgba(0, 0, 0, 0.12);
   background-color: transparent;
   left: 15px;
-  top: 27px; }
+  top: 27px;
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.1s;
+  animation-iteration-count: infinite; }
   .triangle-2:after {
     content: " ";
     display: block;
@@ -138,10 +218,15 @@
 .triangle-3 {
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
-  border-bottom: 19px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 20px solid rgba(0, 0, 0, 0.12);
   background-color: transparent;
   left: 43px;
-  top: 60px; }
+  top: 60px;
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.2s;
+  animation-iteration-count: infinite; }
   .triangle-3:after {
     content: " ";
     display: block;
@@ -150,7 +235,7 @@
     border-right: 5px solid transparent;
     border-bottom: 9px solid transparent;
     top: 6px;
-    left: -4.75px;
+    left: -5px;
     transition: border-bottom-color 0.4s ease; }
     .red .triangle-3:after {
       border-bottom-color: #fc5c82; }
@@ -170,7 +255,12 @@
   top: 61px;
   left: 17px;
   background-color: transparent;
-  border-style: solid; }
+  border-style: solid;
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.3s;
+  animation-iteration-count: infinite; }
 
 .triangle-5 {
   border-left: 5px solid transparent;
@@ -179,7 +269,12 @@
   background-color: transparent;
   left: 25px;
   top: 101px;
-  transform: rotate(180deg); }
+  transform: rotate(180deg);
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.4s;
+  animation-iteration-count: infinite; }
 
 .triangle-6 {
   border-left: 4px solid transparent;
@@ -188,7 +283,12 @@
   background-color: transparent;
   left: 60px;
   top: 103px;
-  transform: rotate(-90deg); }
+  transform: rotate(-90deg);
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.5s;
+  animation-iteration-count: infinite; }
 
 .triangle-7 {
   border-left: 12.5px solid transparent;
@@ -197,7 +297,12 @@
   background-color: transparent;
   left: 17px;
   top: 126px;
-  transform: rotate(180deg); }
+  transform: rotate(180deg);
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.6s;
+  animation-iteration-count: infinite; }
 
 .triangle-8 {
   border-left: 10.5px solid transparent;
@@ -205,7 +310,12 @@
   border-bottom: 16px solid rgba(0, 0, 0, 0.12);
   background-color: transparent;
   left: 50px;
-  top: 149px; }
+  top: 149px;
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.7s;
+  animation-iteration-count: infinite; }
 
 .triangle-9 {
   border-left: 5.5px solid transparent;
@@ -213,7 +323,12 @@
   border-bottom: 8px solid rgba(0, 0, 0, 0.12);
   background-color: transparent;
   left: 21px;
-  top: 177px; }
+  top: 177px;
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.8s;
+  animation-iteration-count: infinite; }
 
 .triangle-10 {
   border-radius: 50%;
@@ -224,7 +339,12 @@
   height: 10px;
   width: 10px;
   top: 177px;
-  left: 60px; }
+  left: 60px;
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 0.9s;
+  animation-iteration-count: infinite; }
 
 .triangle-11 {
   border-left: 9px solid transparent;
@@ -233,7 +353,12 @@
   background-color: transparent;
   left: 33px;
   top: 213px;
-  transform: rotate(180deg); }
+  transform: rotate(180deg);
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 1s;
+  animation-iteration-count: infinite; }
 
 .triangle-12 {
   border-radius: 50%;
@@ -246,7 +371,12 @@
   top: 233px;
   left: 65px;
   background-color: transparent;
-  border-style: solid; }
+  border-style: solid;
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 1.1s;
+  animation-iteration-count: infinite; }
 
 .triangle-13 {
   border-radius: 50%;
@@ -257,7 +387,12 @@
   height: 10px;
   width: 10px;
   top: 250px;
-  left: 22px; }
+  left: 22px;
+  animation-name: spinY;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 1.2s;
+  animation-iteration-count: infinite; }
 
 .triangle-14 {
   border-left: 8px solid transparent;
@@ -266,7 +401,12 @@
   background-color: transparent;
   left: 45px;
   top: 270px;
-  transform: rotate(180deg); }
+  transform: rotate(180deg);
+  animation-name: spinX;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+  animation-delay: 1.3s;
+  animation-iteration-count: infinite; }
   .triangle-14:after {
     content: " ";
     display: block;
@@ -311,30 +451,60 @@
     background-color: transparent !important;
     border-style: solid;
     box-sizing: border-box; }
+  .stick .block-1 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0s;
+    animation-iteration-count: infinite; }
 
 .stick .block-2 {
   height: 14px;
   width: 42px;
   top: 50px;
   left: 15px; }
+  .stick .block-2 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.03s;
+    animation-iteration-count: infinite; }
 
 .stick .block-3 {
   height: 18px;
   width: 9px;
   top: 73px;
   left: 64px; }
+  .stick .block-3 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.06s;
+    animation-iteration-count: infinite; }
 
 .stick .block-4 {
   height: 9px;
   width: 14px;
   top: 84px;
   left: 26px; }
+  .stick .block-4 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.09s;
+    animation-iteration-count: infinite; }
 
 .stick .block-5 {
   height: 15px;
   width: 15px;
   top: 109px;
   left: 45px; }
+  .stick .block-5 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.12s;
+    animation-iteration-count: infinite; }
   .stick .block-5 .inner {
     border-radius: 50%; }
 
@@ -343,12 +513,24 @@
   width: 27px;
   top: 135px;
   left: 19px; }
+  .stick .block-6 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.15s;
+    animation-iteration-count: infinite; }
 
 .stick .block-7 {
   height: 12px;
   width: 12px;
   top: 144px;
   left: 60px; }
+  .stick .block-7 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.18s;
+    animation-iteration-count: infinite; }
   .stick .block-7 .inner {
     border-radius: 50%;
     border-style: solid;
@@ -360,12 +542,24 @@
   width: 14px;
   top: 164px;
   left: 24px; }
+  .stick .block-8 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.21s;
+    animation-iteration-count: infinite; }
 
 .stick .block-9 {
   height: 8px;
   width: 8px;
   top: 188px;
   left: 64px; }
+  .stick .block-9 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.24s;
+    animation-iteration-count: infinite; }
 
 .stick .block-10 {
   height: 12px;
@@ -376,12 +570,24 @@
     background-color: transparent !important;
     border-style: solid;
     box-sizing: border-box; }
+  .stick .block-10 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.27s;
+    animation-iteration-count: infinite; }
 
 .stick .block-11 {
   height: 22px;
   width: 22px;
   top: 226px;
   left: 50px; }
+  .stick .block-11 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.3s;
+    animation-iteration-count: infinite; }
   .stick .block-11 .inner {
     border-radius: 50%; }
 
@@ -390,12 +596,24 @@
   width: 9px;
   top: 248px;
   left: 26px; }
+  .stick .block-12 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.33s;
+    animation-iteration-count: infinite; }
 
 .stick .block-13 {
   height: 8px;
   width: 8px;
   top: 278px;
   left: 50px; }
+  .stick .block-13 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.36s;
+    animation-iteration-count: infinite; }
   .stick .block-13 .inner {
     border-radius: 50%; }
 
@@ -408,12 +626,24 @@
     background-color: transparent !important;
     border-style: solid;
     box-sizing: border-box; }
+  .stick .block-14 .inner {
+    animation-name: blockL;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.39s;
+    animation-iteration-count: infinite; }
 
 .stick .block-15 {
   height: 9px;
   width: 27px;
   top: 307px;
   left: 48px; }
+  .stick .block-15 .inner {
+    animation-name: blockR;
+    animation-duration: 1.6s;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.45, 0.99);
+    animation-delay: 0.42s;
+    animation-iteration-count: infinite; }
 
 @keyframes wave {
   from {
@@ -438,6 +668,58 @@
     background-position: 0 0; }
   to {
     background-position: -1001px 0; } }
+
+@keyframes glows {
+  from {
+    transform: rotate(0); }
+  to {
+    transform: rotate(1turn); } }
+
+@keyframes appear {
+  from {
+    transform: scale(0.1); }
+  to {
+    transform: scale(1); } }
+
+@keyframes bubble {
+  0% {
+    transform: translateY(0); }
+  50% {
+    transform: translateY(-60px); }
+  100% {
+    transform: translateY(0); } }
+
+@keyframes spinX {
+  0% {
+    transform: rotateX(0); }
+  94% {
+    transform: rotateX(1turn); }
+  100% {
+    transform: rotateX(1turn); } }
+
+@keyframes spinY {
+  0% {
+    transform: rotateY(0); }
+  94% {
+    transform: rotateY(1turn); }
+  100% {
+    transform: rotateY(1turn); } }
+
+@keyframes blockL {
+  0% {
+    transform: translateX(0); }
+  60% {
+    transform: translateX(-200%); }
+  100% {
+    transform: translateX(-200%); } }
+
+@keyframes blockR {
+  0% {
+    transform: translateX(0); }
+  60% {
+    transform: translateX(200%); }
+  100% {
+    transform: translateX(200%); } }
 
 body {
   background-color: #28DAD4;
@@ -596,6 +878,126 @@ a {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.34);
   box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.34); }
+  .small-glow:nth-child(1) {
+    animation-name: glows;
+    animation-duration: 18s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -22px -22px; }
+  .small-glow:nth-child(2) {
+    animation-name: glows;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -33px -33px; }
+  .small-glow:nth-child(3) {
+    animation-name: glows;
+    animation-duration: 22s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -24px -24px; }
+  .small-glow:nth-child(4) {
+    animation-name: glows;
+    animation-duration: 17s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -38px -38px; }
+  .small-glow:nth-child(5) {
+    animation-name: glows;
+    animation-duration: 22s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -22px -22px; }
+  .small-glow:nth-child(6) {
+    animation-name: glows;
+    animation-duration: 17s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -36px -36px; }
+  .small-glow:nth-child(7) {
+    animation-name: glows;
+    animation-duration: 16s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -29px -29px; }
+  .small-glow:nth-child(8) {
+    animation-name: glows;
+    animation-duration: 19s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -34px -34px; }
+  .small-glow:nth-child(9) {
+    animation-name: glows;
+    animation-duration: 18s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -22px -22px; }
+  .small-glow:nth-child(10) {
+    animation-name: glows;
+    animation-duration: 21s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -34px -34px; }
+  .small-glow:nth-child(11) {
+    animation-name: glows;
+    animation-duration: 17s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -35px -35px; }
+  .small-glow:nth-child(12) {
+    animation-name: glows;
+    animation-duration: 16s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -30px -30px; }
+  .small-glow:nth-child(13) {
+    animation-name: glows;
+    animation-duration: 21s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -39px -39px; }
+  .small-glow:nth-child(14) {
+    animation-name: glows;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -20px -20px; }
+  .small-glow:nth-child(15) {
+    animation-name: glows;
+    animation-duration: 22s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -39px -39px; }
+  .small-glow:nth-child(16) {
+    animation-name: glows;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -35px -35px; }
+  .small-glow:nth-child(17) {
+    animation-name: glows;
+    animation-duration: 19s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -28px -28px; }
+  .small-glow:nth-child(18) {
+    animation-name: glows;
+    animation-duration: 16s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -32px -32px; }
+  .small-glow:nth-child(19) {
+    animation-name: glows;
+    animation-duration: 18s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -22px -22px; }
+  .small-glow:nth-child(20) {
+    animation-name: glows;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -36px -36px; }
 
 .small-glow.yellow {
   background-color: rgba(255, 227, 69, 0.34);
@@ -639,7 +1041,14 @@ a {
   height: 53px;
   z-index: 1011;
   background-color: #FF4571;
-  border-radius: 50%; }
+  border-radius: 50%;
+  transition: background-color 0.5s ease; }
+  .ball.red, .ball-demo.red {
+    background-color: #FF4571; }
+  .ball.yellow, .ball-demo.yellow {
+    background-color: #FFD145; }
+  .ball.purple, .ball-demo.purple {
+    background-color: #8260F6; }
 
 .ball {
   margin-bottom: 250px; }
@@ -740,6 +1149,9 @@ a {
     position: relative;
     display: flex;
     justify-content: space-around; }
+    .start-game .how-to-play .content .stick {
+      margin: -36px 12px;
+      transform: scale(0.8); }
   .start-game .how-to-play .bar {
     width: 60px;
     border-radius: 7px;

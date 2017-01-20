@@ -65,11 +65,11 @@ class Game {
         let introTl = new TimelineMax();
         let ball = new TimelineMax({repeat: -1, delay: 3});
 
-        introTl
-            .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
-            .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
-            .staggerFromTo('.start-game .bar', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08)
-            .staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2)
+        // introTl
+        //     .fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 })
+        //     .staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08)
+        //     .staggerFromTo('.start-game .stick', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08)
+        //     .staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2)
 
 
         ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn})
@@ -79,9 +79,26 @@ class Game {
                             this.color = (new Color).getRandomColor();
                         }
                         this.prevColor = this.color;
-                        TweenMax.to('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
+                        //TweenMax.css('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
+                        $('.start-game .section-1 .ball-demo')
+                                .removeClass('red')
+                                .removeClass('yellow')
+                                .removeClass('purple')
+                                .addClass((new Color).colorcodeToName(this.color));
                     } 
                 });
+
+        let animation = new Animation();
+        let one = $('.how-to-play .content .stick.inactive:nth-child(1)');
+        let two = $('.how-to-play .content .stick.inactive:nth-child(2)');
+        let three = $('.how-to-play .content .stick.inactive:nth-child(3)');
+
+        (new Color).setColorAndEffect(one, 0, 'bubble');
+        (new Color).setColorAndEffect(two, 1, 'triangle');
+        (new Color).setColorAndEffect(three, 2, 'block');
+        // animation.playBubble(one);
+        // animation.playTriangle(two);
+        // animation.playBlock(three);
     }
 
     /**
@@ -300,7 +317,7 @@ class Game {
                             this.color = (new Color).getRandomColor();
                         }
                         this.prevColor = this.color;
-                        TweenMax.to('#ball', 0.5, {backgroundColor: this.color});
+                        //TweenMax.to('#ball', 0.5, {backgroundColor: this.color});
                         $('#ball').removeClass('red')
                                   .removeClass('yellow')
                                   .removeClass('purple')
@@ -399,6 +416,25 @@ class Color {
         el.removeClass('inactive');
     }
 
+    setColorAndEffect(el, color, effect) {
+        let index = color;
+        el
+            .css('background-color', this.colors[index])
+            .data('index', index);
+
+        el.removeClass('red')
+          .removeClass('yellow')
+          .removeClass('purple')
+          .addClass(this.colorcodeToName(this.colors[index]));
+
+        if(el.hasClass('inactive')) {
+            this.setEffectCustom(el, effect);
+            el.addClass('no-effect');
+        }
+        
+        el.removeClass('inactive');
+    }
+
     getRandomEffect() {
         let effectIndex = null;
         
@@ -416,6 +452,17 @@ class Color {
      */
     setEffect(el) {
         let effect = this.getRandomEffect();
+        el.addClass(effect + '-stick');
+        for(let i = 1; i <= 14; i++) {
+            if(effect=='block') {
+                el.append(`<div class="${effect} ${effect}-${i}"><div class="inner"></div><div class="inner inner-2"></div></div>`);
+            } else {
+                el.append(`<div class="${effect} ${effect}-${i}"></div>`);
+            }
+        }
+    }
+
+    setEffectCustom(el, effect) {
         el.addClass(effect + '-stick');
         for(let i = 1; i <= 14; i++) {
             if(effect=='block') {
@@ -456,12 +503,12 @@ class Animation {
         w = w/scale;
 
         for(let i = 0; i < number; i++) {
-            let left = Math.floor(Math.random()*w);
-            let top = Math.floor(Math.random()*(h/2));
+            let left = Math.floor(Math.random()*w) / 1280 * 100;
+            let top = Math.floor(Math.random()*(h/2)) / 800 * 100;
             let size = Math.floor(Math.random()*8) + 4;
             $('.small-glows').prepend('<div class="small-glow"></div>');
             let noise = $('.small-glows .small-glow').first();
-            noise.css({left: left, top: top, height: size, width: size});
+            noise.css({left: left + '%', top: top + '%', height: size, width: size});
         }
     }
 
@@ -516,11 +563,12 @@ class Animation {
         const speed = 15; // uses it's local speed
 
         // animates the small glows in a circular motion
-        $('.small-glow').each(function(){
-            let speedDelta = Math.floor(Math.random()*8);
-            let radius = Math.floor(Math.random()*20)+20;
-            TweenMax.to($(this), speed+speedDelta, {rotation: 360, transformOrigin: "-"+radius+"px -"+radius+"px", repeat: -1, ease: Power0.easeNone});
-        })
+        // $('.small-glow').each(function(){
+        //     let speedDelta = Math.floor(Math.random()*8);
+        //     let radius = Math.floor(Math.random()*20)+20;
+        //     TweenMax.to($(this), speed+speedDelta, {rotation: 360, transformOrigin: "-"+radius+"px -"+radius+"px", repeat: -1, ease: Power0.easeNone});
+        //     console.log(speed+speedDelta, radius);
+        // })
 
         // var wavet = TweenMax.to('.top_wave', speed*1.7/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
         // var wave1 = TweenMax.to('.wave1', speed*1.9/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
