@@ -1,5 +1,7 @@
+@import "variables";
 @import "mixins";
 @import "shapes";
+@import "animations";
 
 body {
     background-color: #28DAD4;
@@ -7,6 +9,7 @@ body {
     padding: 0;
     overflow: hidden;
     font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 body * {
@@ -50,48 +53,56 @@ a {
     height: 151px;
     background: url(../svg/clouds.svg) repeat-x;
     background-position-x: 170px; 
+    animation: clouds 45s linear infinite;
 }
 .top_wave {
     background: url(../svg/top_wave.png) repeat-x 0 -1px;
     height: 35px;
     bottom: 0;
     z-index: 10001;
+    @include wave_animation(0.6);
 }
 .wave1 {
     background: url(../svg/wave1.svg) repeat-x;
     height: 150px;
     bottom: 0;
     z-index: 23;
+    @include wave_animation(0.8);
 }
 .wave2 {
     background: url(../svg/wave2.svg) repeat-x;
     height: 180px;
     bottom: 30px;
     z-index: 22;
+    @include wave_animation(1);
 }
 .wave3 {
     background: url(../svg/wave3.svg) repeat-x;
     height: 180px;
     bottom: 90px;
     z-index: 21;
+    @include wave_animation(1.2);
 }
 .wave4 {
     background: url(../svg/wave4.svg) repeat-x;
     height: 180px;
     bottom: 120px;
     z-index: 20;
+    @include wave_animation(1.4);
 }
 .mount1 {
     background: url(../svg/mount1.svg) repeat-x;
     height: 150px;
     bottom: 280px;
     z-index: 11;
+    animation: mount1 120s linear infinite;
 }
 .mount2 {
     background: url(../svg/mount2.svg) repeat-x;
     height: 150px;
     bottom: 290px;
     z-index: 10;
+    animation: mount2 150s linear infinite;
 }
 .noise {
     position: fixed;
@@ -132,6 +143,26 @@ a {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.34);
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.34);
+    &:nth-child(1) { @include glow_animation(18, 22); }
+    &:nth-child(2) { @include glow_animation(15, 33); }
+    &:nth-child(3) { @include glow_animation(22, 24); }
+    &:nth-child(4) { @include glow_animation(17, 38); }
+    &:nth-child(5) { @include glow_animation(22, 22); }
+    &:nth-child(6) { @include glow_animation(17, 36); }
+    &:nth-child(7) { @include glow_animation(16, 29); }
+    &:nth-child(8) { @include glow_animation(19, 34); }
+    &:nth-child(9) { @include glow_animation(18, 22); }
+    &:nth-child(10) { @include glow_animation(21, 34); }
+    &:nth-child(11) { @include glow_animation(17, 35); }
+    &:nth-child(12) { @include glow_animation(16, 30); }
+    &:nth-child(13) { @include glow_animation(21, 39); }
+    &:nth-child(14) { @include glow_animation(20, 20); }
+    &:nth-child(15) { @include glow_animation(22, 39); }
+    &:nth-child(16) { @include glow_animation(15, 35); }
+    &:nth-child(17) { @include glow_animation(19, 28); }
+    &:nth-child(18) { @include glow_animation(16, 32); }
+    &:nth-child(19) { @include glow_animation(18, 22); }
+    &:nth-child(20) { @include glow_animation(15, 36); }
 }
 .small-glow.yellow {
     background-color: rgba(255, 227, 69, 0.34);
@@ -177,6 +208,10 @@ a {
     z-index: 1011;
     background-color: #FF4571;
     border-radius: 50%;
+    transition: background-color 0.5s ease;
+    &.red    { background-color: #FF4571; }
+    &.yellow { background-color: #FFD145; }
+    &.purple { background-color: #8260F6; }
 }
 .ball {
     margin-bottom: 250px;
@@ -289,6 +324,10 @@ a {
             position: relative;
             display: flex;
             justify-content: space-around;
+            .stick {
+                margin: -36px 12px;
+                transform: scale(0.8);
+            }
         }
         .bar {
             width: 60px;
@@ -320,9 +359,8 @@ a {
             .ball-demo {
                 background-color: #815FF8;
             }
-            .bar-1 {
-                height: 120px;
-                background-color: #815FF8;
+            .stick {    
+                margin: 26px 12px;
             }
         }
     }

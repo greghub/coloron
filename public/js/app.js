@@ -85,7 +85,8 @@ var Game = function () {
 
             var introTl = new TimelineMax();
             var ball = new TimelineMax({ repeat: -1, delay: 3 });
-            introTl.fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 }).staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08).staggerFromTo('.start-game .bar', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08).staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2);
+
+            introTl.fromTo('.start-game .logo-holder', 0.9, { opacity: 0 }, { opacity: 1 }).staggerFromTo('.start-game .logo span', 0.5, { opacity: 0 }, { opacity: 1 }, 0.08).staggerFromTo('.start-game .stick', 1.6, { y: '+100%' }, { y: '0%', ease: Elastic.easeOut.config(1, 0.3) }, 0.08).staggerFromTo('.start-game .ball-demo', 1, { scale: 0 }, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, 0.8, 2);
 
             ball.fromTo('.start-game .section-1 .ball-demo', 0.5, { y: "0px" }, { y: "100px", scaleY: 1.1, transformOrigin: "bottom", ease: Power2.easeIn }).to('.start-game .section-1 .ball-demo', 0.5, { y: "0px", scaleY: 1, transformOrigin: "bottom", ease: Power2.easeOut,
                 onStart: function onStart() {
@@ -93,9 +94,24 @@ var Game = function () {
                         _this.color = new Color().getRandomColor();
                     }
                     _this.prevColor = _this.color;
-                    TweenMax.to('.start-game .section-1 .ball-demo', 0.5, { backgroundColor: _this.color });
+                    //TweenMax.css('.start-game .section-1 .ball-demo', 0.5, {backgroundColor: this.color});
+                    $('.start-game .section-1 .ball-demo').removeClass('red').removeClass('yellow').removeClass('purple').addClass(new Color().colorcodeToName(_this.color));
                 }
             });
+
+            var animation = new Animation();
+            var one = $('.how-to-play .section-2 .content .stick.inactive:nth-child(1)');
+            var two = $('.how-to-play .section-2 .content .stick.inactive:nth-child(2)');
+            var three = $('.how-to-play .section-2 .content .stick.inactive:nth-child(3)');
+            var four = $('.how-to-play .section-3 .content .stick.inactive');
+
+            new Color().setColorAndEffect(one, 0, 'bubble');
+            new Color().setColorAndEffect(two, 1, 'triangle');
+            new Color().setColorAndEffect(three, 2, 'block');
+            new Color().setColorAndEffect(four, 2, 'block');
+            // animation.playBubble(one);
+            // animation.playTriangle(two);
+            // animation.playBlock(three);
         }
 
         /**
@@ -214,10 +230,6 @@ var Game = function () {
         value: function moveToStart() {
             var _this2 = this;
 
-            var tip = new TimelineMax({ delay: 2 });
-
-            tip.fromTo('.learn-to-play', 1, { scale: 0 }, { scale: 1, opacity: 1, ease: Elastic.easeOut.config(1.25, 0.5) }).to('.learn-to-play', 1, { scale: 0, opacity: 0, ease: Elastic.easeOut.config(1.25, 0.5) }, 3);
-
             TweenMax.fromTo('#ball', this.time, {
                 scale: 0
             }, {
@@ -313,7 +325,7 @@ var Game = function () {
                         _this4.color = new Color().getRandomColor();
                     }
                     _this4.prevColor = _this4.color;
-                    TweenMax.to('#ball', 0.5, { backgroundColor: _this4.color });
+                    //TweenMax.to('#ball', 0.5, {backgroundColor: this.color});
                     $('#ball').removeClass('red').removeClass('yellow').removeClass('purple').addClass(new Color().colorcodeToName(_this4.color));
                 }
             });
@@ -333,6 +345,7 @@ var Game = function () {
                         // if matches increase the score
                         score++;
                         $('#score').text(score);
+                        $(this).addClass('touched');
                         TweenMax.fromTo('#score', 0.5, { scale: 1.5 }, { scale: 1, ease: Elastic.easeOut.config(1.5, 0.5) });
                     } else {
 
@@ -420,6 +433,21 @@ var Color = function () {
             el.removeClass('inactive');
         }
     }, {
+        key: "setColorAndEffect",
+        value: function setColorAndEffect(el, color, effect) {
+            var index = color;
+            el.css('background-color', this.colors[index]).data('index', index);
+
+            el.removeClass('red').removeClass('yellow').removeClass('purple').addClass(this.colorcodeToName(this.colors[index]));
+
+            if (el.hasClass('inactive')) {
+                this.setEffectCustom(el, effect);
+                el.addClass('no-effect');
+            }
+
+            el.removeClass('inactive');
+        }
+    }, {
         key: "getRandomEffect",
         value: function getRandomEffect() {
             var effectIndex = null;
@@ -441,6 +469,18 @@ var Color = function () {
         key: "setEffect",
         value: function setEffect(el) {
             var effect = this.getRandomEffect();
+            el.addClass(effect + '-stick');
+            for (var i = 1; i <= 14; i++) {
+                if (effect == 'block') {
+                    el.append("<div class=\"" + effect + " " + effect + "-" + i + "\"><div class=\"inner\"></div><div class=\"inner inner-2\"></div></div>");
+                } else {
+                    el.append("<div class=\"" + effect + " " + effect + "-" + i + "\"></div>");
+                }
+            }
+        }
+    }, {
+        key: "setEffectCustom",
+        value: function setEffectCustom(el, effect) {
             el.addClass(effect + '-stick');
             for (var i = 1; i <= 14; i++) {
                 if (effect == 'block') {
@@ -543,12 +583,12 @@ var Animation = function () {
             w = w / scale;
 
             for (var i = 0; i < number; i++) {
-                var left = Math.floor(Math.random() * w);
-                var top = Math.floor(Math.random() * (h / 2));
+                var left = Math.floor(Math.random() * w) / 1280 * 100;
+                var top = Math.floor(Math.random() * (h / 2)) / 800 * 100;
                 var size = Math.floor(Math.random() * 8) + 4;
                 $('.small-glows').prepend('<div class="small-glow"></div>');
                 var noise = $('.small-glows .small-glow').first();
-                noise.css({ left: left, top: top, height: size, width: size });
+                noise.css({ left: left + '%', top: top + '%', height: size, width: size });
             }
         }
     }, {
@@ -558,22 +598,23 @@ var Animation = function () {
             var speed = 15; // uses it's local speed
 
             // animates the small glows in a circular motion
-            $('.small-glow').each(function () {
-                var speedDelta = Math.floor(Math.random() * 8);
-                var radius = Math.floor(Math.random() * 20) + 20;
-                TweenMax.to($(this), speed + speedDelta, { rotation: 360, transformOrigin: "-" + radius + "px -" + radius + "px", repeat: -1, ease: Power0.easeNone });
-            });
+            // $('.small-glow').each(function(){
+            //     let speedDelta = Math.floor(Math.random()*8);
+            //     let radius = Math.floor(Math.random()*20)+20;
+            //     TweenMax.to($(this), speed+speedDelta, {rotation: 360, transformOrigin: "-"+radius+"px -"+radius+"px", repeat: -1, ease: Power0.easeNone});
+            //     console.log(speed+speedDelta, radius);
+            // })
 
-            var wavet = TweenMax.to('.top_wave', speed * 1.7 / 42, { backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone });
-            var wave1 = TweenMax.to('.wave1', speed * 1.9 / 42, { backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone });
-            var wave2 = TweenMax.to('.wave2', speed * 2 / 42, { backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone });
-            var wave3 = TweenMax.to('.wave3', speed * 2.2 / 42, { backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone });
-            var wave4 = TweenMax.to('.wave4', speed * 2.4 / 42, { backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone });
+            // var wavet = TweenMax.to('.top_wave', speed*1.7/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+            // var wave1 = TweenMax.to('.wave1', speed*1.9/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+            // var wave2 = TweenMax.to('.wave2', speed*2/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+            // var wave3 = TweenMax.to('.wave3', speed*2.2/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
+            // var wave4 = TweenMax.to('.wave4', speed*2.4/42, {backgroundPositionX: '-=54px', repeat: -1, ease: Power0.easeNone});
 
-            var mount1 = TweenMax.to('.mount1', speed * 8, { backgroundPositionX: '-=1760px', repeat: -1, ease: Power0.easeNone });
-            var mount2 = TweenMax.to('.mount2', speed * 10, { backgroundPositionX: '-=1782px', repeat: -1, ease: Power0.easeNone });
+            // var mount1 = TweenMax.to('.mount1', speed*8, {backgroundPositionX: '-=1760px', repeat: -1, ease: Power0.easeNone});
+            // var mount2 = TweenMax.to('.mount2', speed*10, {backgroundPositionX: '-=1782px', repeat: -1, ease: Power0.easeNone});
 
-            var clouds = TweenMax.to('.clouds', speed * 3, { backgroundPositionX: '-=1001px', repeat: -1, ease: Power0.easeNone });
+            // var clouds = TweenMax.to('.clouds', speed*3, {backgroundPositionX: '-=1001px', repeat: -1, ease: Power0.easeNone});   
         }
     }]);
 

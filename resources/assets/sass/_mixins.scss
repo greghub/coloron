@@ -1,4 +1,4 @@
-@mixin bubble_shape ($width: 4px) {
+@mixin bubble_shape($width: 4px) {
     border-radius: 50%;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.12);
@@ -6,20 +6,20 @@
     border-width: $width;
 }
 
-@mixin bubble ($size, $top, $left) {
+@mixin bubble($size, $top, $left) {
     height: $size;
     width: $size;
     top: $top;
     left: $left;
 }
 
-@mixin bubble_hollow ($size, $top, $left) {
-    @include bubble ($size, $top, $left);
+@mixin bubble_hollow($size, $top, $left) {
+    @include bubble($size, $top, $left);
     background-color: transparent;
     border-style: solid;
 }
 
-@mixin triangle ($height, $width, $top, $left) {
+@mixin triangle($height, $width, $top, $left) {
     border-left: ($height/2) solid transparent;
     border-right: ($height/2) solid transparent;
     border-bottom: $width solid rgba(0, 0, 0, 0.12);
@@ -28,8 +28,8 @@
     top: $top;
 }
 
-@mixin triangle_hollow ($height, $width, $top, $left) {
-    @include triangle( $height, $width, $top, $left );
+@mixin triangle_hollow($height, $width, $top, $left) {
+    @include triangle($height, $width, $top, $left );
     &:after {    
         content: " ";
         display: block;
@@ -40,7 +40,6 @@
         top: 6px;
         left: -($width/4);
         transition: border-bottom-color 0.4s ease;
-
         .red & {
             border-bottom-color: #fc5c82;
         }
@@ -53,18 +52,65 @@
     }
 }
 
-@mixin block ($height, $width, $top, $left) {
+@mixin block($height, $width, $top, $left) {
     height: $height;
     width: $width;
     top: $top;
     left: $left;
 }
 
-@mixin block_hollow ($height, $width, $top, $left) {
-    @include block ($height, $width, $top, $left);
+@mixin block_hollow($height, $width, $top, $left) {
+    @include block($height, $width, $top, $left);
     & .inner {
         background-color: transparent !important;
         border-style: solid;
         box-sizing: border-box;
     }
+}
+
+@mixin wave_animation($time) {
+    animation-name: wave;
+    animation-duration: #{$time}s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@mixin glow_animation($time, $radius) {
+    animation-name: glows;
+    animation-duration: #{$time}s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: -#{$radius}px -#{$radius}px;
+}
+
+@mixin appear_animation($delay) {
+    animation-name: appear;
+    animation-duration: 0.3s;
+    animation-timing-function: $timing1;
+    animation-delay: #{$delay}s;
+    animation-fill-mode: forwards;
+}
+
+@mixin bubble_animation($delay) {
+    animation-name: bubble;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: #{$delay}s;
+    animation-iteration-count: infinite;
+}
+
+@mixin triangle_animation($axis, $delay) {
+    animation-name: spin#{$axis};
+    animation-duration: 1.6s;
+    animation-timing-function: $timing1;
+    animation-delay: #{$delay}s;
+    animation-iteration-count: infinite;
+}
+
+@mixin block_animation($direction, $delay) {
+    animation-name: block#{$direction};
+    animation-duration: 1.6s;
+    animation-timing-function: $timing1;
+    animation-delay: #{$delay}s;
+    animation-iteration-count: infinite;
 }
